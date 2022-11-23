@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br>
+<h2>Category:</h2>
+<br><br>
+<ul>
+        {% for cat in category%}
+        <li>{{cat}}</li>
+    {% endfor%}
+</ul>
+
+<h2>product:</h2>
+<br><br>
+<ul>
+        {% for pr in product%}
+        <li>{{pr.name}}</li>
+        <li>{{pr.attrs}}</li>
+    {% endfor%}
+</ul>
+
+
+
+
+
+</body>
+</html>

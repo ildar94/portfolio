@@ -1,0 +1,23 @@
+.keyVal {
+  &_row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px -20px 0;
+  }
+
+  &_row &__item {
+    margin: 20px;
+  }
+
+  &__key {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 36px;
+    text-transform: uppercase;
+  }
+
+  &__val {
+    line-height: 23px;
+  }
+}

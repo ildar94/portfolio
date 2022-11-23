@@ -1,0 +1,7 @@
+.icon {
+	display: inline-flex;
+
+	&_gray &__path {
+		fill: $surface;
+	}
+}

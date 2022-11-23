@@ -1,0 +1,9 @@
+db.sqlite3
+elektrosamokat.json
+elektrosamokat - Copy.json
+max-version.json
+mydata.json
+parse-images.py
+parse_json.py
+parse_max_version.py
+to_db.py

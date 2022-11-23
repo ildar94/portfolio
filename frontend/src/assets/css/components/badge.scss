@@ -1,0 +1,22 @@
+.badge {
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 14px;
+	font-weight: 500;
+
+	&_primary {
+		background-color: $primary;
+	}
+
+	&_secondary {
+		background-color: $secondary;
+	}
+
+	&_danger {
+		background-color: $danger;
+	}
+
+	&_success {
+		background: $success-500;
+	}
+}

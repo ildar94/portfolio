@@ -1,0 +1,21 @@
+=~=~=~=~=~=~=~=~=~=~=~= PuTTY log 2022.11.22 12:45:22 =~=~=~=~=~=~=~=~=~=~=~=
+login as: ildar
+ildar@78.24.222.144's password: 
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-29-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+Last login: Thu Nov 17 18:54:48 2022 from 46.164.222.62
+]0;ildar@immortallester1: ~ildar@immortallester1:~$ docker volume ls[1@s[1@u[C[1@d[1@o[1@ 
+[sudo] password for ildar: 
+Sorry, try again.
+[sudo] password for ildar: 
+DRIVER    VOLUME NAME
+local     10cc94349c6defaae64a51ce92910b53d3e58ad5d315848ffb92aa0e1342677e
+local     59e92bbf2e9e7632b35f1c60b655c05929c0cb66d70613e46d8d82fd90cfde47
+local     118eb1148a0fd18646e2a606aa28937abee018cf8fed3bdaf9d7dd8347d020b0
+local     cif-volume
+local     pgdata
+local     pgdate
+]0;ildar@immortallester1: ~ildar@immortallester1:~$ [K]0;ildar@immortallester1: ~ildar@immortallester1:~$ 

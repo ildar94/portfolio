@@ -1,0 +1,319 @@
+{
+  "cart": [
+    {
+      "id": "2",
+      "cnt": 3
+    },
+    {
+      "id": "4",
+      "cnt": 2
+    }
+  ],
+  "mainProducts": [
+    {
+      "id": "1",
+      "images": ["@/assets/img/misc/product.png", "@/assets/img/misc/product.png", "@/assets/img/misc/product2.png"],
+      "status": {
+        "text": "Хит",
+        "badge": "danger"
+      },
+      "isInCompare": false,
+      "isInCart": false,
+      "isInFavorites": false,
+      "title": "Kugoo Kirin M4",
+      "features": [
+        {
+          "icon": "battery",
+          "text": "2000 mAh"
+        },
+        {
+          "icon": "speed",
+          "text": "60 км/ч"
+        },
+        {
+          "icon": "power",
+          "text": "1,2 л.с."
+        },
+        {
+          "icon": "time",
+          "text": "5 часов"
+        }
+      ],
+      "price": "29 900",
+      "oldPrice": "39 900"
+    },
+    {
+      "id": "2",
+      "images": ["@/assets/img/misc/product.png", "@/assets/img/misc/product.png", "@/assets/img/misc/product.png"],
+      "status": {
+        "text": "Новинка",
+        "badge": "success"
+      },
+      "isInCompare": true,
+      "isInCart": false,
+      "isInFavorites": false,
+      "title": "Kugoo Kirin M2",
+      "features": [
+        {
+          "icon": "battery",
+          "text": "2400 mAh"
+        },
+
+        {
+          "text": "1,6 л.с."
+        },
+        {
+          "icon": "time",
+          "text": "5 часов"
+        }
+      ],
+      "price": "28 400",
+      "oldPrice": "38 100"
+    },
+    {
+      "id": "3",
+      "images": ["@/assets/img/misc/product.png", "@/assets/img/misc/product.png", "@/assets/img/misc/product.png"],
+      "status": {
+        "text": "Новинка",
+        "badge": "primary"
+      },
+      "isInCompare": false,
+      "isInCart": true,
+      "isInFavorites": true,
+      "title": "Kugoo Kirin M1",
+      "features": [
+        {
+          "icon": "battery",
+          "text": "2100 mAh"
+        },
+        {
+          "icon": "power",
+          "text": "1,1 л.с."
+        }
+      ],
+      "price": "21 200",
+      "oldPrice": null
+    },
+    {
+      "id": "3",
+      "images": ["@/assets/img/misc/product.png", "@/assets/img/misc/product.png", "@/assets/img/misc/product.png"],
+      "status": {
+        "text": "Хит",
+        "badge": "secondary"
+      },
+      "isInCompare": true,
+      "isInCart": false,
+      "isInFavorites": false,
+      "title": "Kugoo Kirin M5",
+      "features": [
+        {
+          "icon": "battery",
+          "text": "2100 mAh"
+        },
+        {
+          "icon": "power",
+          "text": "1,1 л.с."
+        }
+      ],
+      "price": "18 200",
+      "oldPrice": null
+    }
+  ],
+  "promo": {
+    "mainBanner": [
+      {
+        "id": "23",
+        "title": "Электросамокаты Kugoo Kirin от официального дилера",
+        "desc": "с бесплатной доставкой по РФ от 1 дня",
+        "image": "https://api.lorem.space/image/movie?w=540&h=405"
+      },
+      {
+        "id": "24",
+        "title": "Электросамокаты Kugoo Kirin от официального дилера2",
+        "desc": "с бесплатной доставкой по РФ от 1 дня2",
+        "image": "https://api.lorem.space/image/movie?w=540&h=405"
+      },
+      {
+        "id": "25",
+        "title": "Электросамокаты Kugoo Kirin от официального дилера3",
+        "desc": "с бесплатной доставкой по РФ от 1 дня3",
+        "image": "https://api.lorem.space/image/movie?w=540&h=405"
+      },
+      {
+        "id": "26",
+        "title": "Электросамокаты Kugoo Kirin от официального дилера4",
+        "desc": "с бесплатной доставкой по РФ от 1 дня4",
+        "image": "asdError"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "id": "1",
+      "icon": "electricKickScooter",
+      "text": "Электросамокаты",
+      "sublist": [
+        {
+          "id": "122",
+          "title": "Особенности",
+          "items": [
+            {
+              "id": "11",
+              "text": "Внедорожный"
+            },
+            {
+              "id": "12",
+              "text": "Городской"
+            },
+            {
+              "id": "13",
+              "text": "Зимний"
+            },
+            {
+              "id": "14",
+              "text": "С сиденьем"
+            },
+            {
+              "id": "15",
+              "text": "Без сиденья"
+            }
+          ]
+        },
+        {
+          "id": "123",
+          "title": "Для кого",
+          "items": [
+            {
+              "id": "21",
+              "text": "Для детей и подростков"
+            },
+            {
+              "id": "22",
+              "text": "Для взрослых"
+            },
+            {
+              "id": "23",
+              "text": "Для пенсионеров"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "icon": "electricScooter",
+      "text": "Электроскутеры",
+      "sublist": [
+        {
+          "id": "124",
+          "title": "Особенности",
+          "items": [
+            {
+              "id": "31",
+              "text": "lorem 1"
+            },
+            {
+              "id": "32",
+              "text": "lorem 2"
+            },
+            {
+              "id": "33",
+              "text": "lorem 3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "icon": "electricBike",
+      "text": "Электровелосипеды",
+      "sublist": [
+        {
+          "id": "125",
+          "title": "Особенности",
+          "items": [
+            {
+              "id": "41",
+              "text": "lorem 31"
+            },
+            {
+              "id": "42",
+              "text": "lorem 32"
+            },
+            {
+              "id": "43",
+              "text": "lorem 33"
+            },
+            {
+              "id": "44",
+              "text": "lorem 34"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "icon": "vacuumCleaner",
+      "text": "Робот-пылесосы",
+      "sublist": [
+        {
+          "id": "126",
+          "title": "Особенности",
+          "items": [
+            {
+              "id": "51",
+              "text": "lorem 41"
+            },
+            {
+              "id": "52",
+              "text": "lorem 42"
+            },
+            {
+              "id": "53",
+              "text": "lorem 43"
+            },
+            {
+              "id": "54",
+              "text": "lorem 44"
+            },
+            {
+              "id": "55",
+              "text": "lorem 45"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "icon": "scale",
+      "text": "Весы",
+      "sublist": [
+        {
+          "id": "127",
+          "title": "Особенности",
+          "items": [
+            {
+              "id": "61",
+              "text": "lorem 51"
+            },
+            {
+              "id": "62",
+              "text": "lorem 52"
+            },
+            {
+              "id": "63",
+              "text": "lorem 53"
+            },
+            {
+              "id": "64",
+              "text": "lorem 54"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

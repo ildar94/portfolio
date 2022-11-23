@@ -1,0 +1,34 @@
+.DS_Store
+node_modules
+
+
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+backend/venv/
+
+backend/env/
+/backend/pgsql/bin/
+/backend/pgsql/symbols/
+/backend/pgsql/share/
+/backend/pgsql/StackBuilder/
+/backend/pgsql/pgAdmin 4/
+/backend/pgsql/doc/
+/backend/pgsql/lib/
+/backend/pgsql/include/

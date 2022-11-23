@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  web:
+    build: ./
+    container_name: back_store_web
+    restart: always
+    command: bash entrypoint.sh
+    volumes:
+      - static_volume:/usr/src/app/static
+      - media:/usr/src/app/media
+      - dist:/usr/src/app/dist
+    ports:
+      - 8000:8000
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+
+  db:
+    image: postgres:12
+    container_name: back_store_db
+    volumes:
+      - type: volume
+        source: pgdata_dev
+        target: /var/lib/postgresql/data
+    env_file:
+      - ./.env.dev
+    ports:
+      - 5432:5432
+
+  nginx:
+    build: ./nginx
+    container_name: back_store_nginx
+    restart: on-failure
+    ports:
+      - 80:80
+    volumes:
+      - static_volume:/usr/src/app/static
+      - media:/usr/src/app/media
+      - dist:/usr/src/app/dist
+    depends_on:
+      - web
+
+
+volumes:
+  pgdata_dev:
+    external: true
+  static_volume:
+  dist:
+  media:
