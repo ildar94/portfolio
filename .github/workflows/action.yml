@@ -1,0 +1,10 @@
+name: Build and deploy workflow
+on: [push]
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      -name: clone code
+      uses: action/checkout@v2
+      -name: show dir
+      run: ls -la
