@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="keyVal keyVal_row">
 			<div class="keyVal__item">
-				<h3 class="keyVal__key">Гарантия 1 год</h3>
+				<h3 class="keyVal__key">Гарантия 2 годa</h3>
 				<span class="keyVal__val">на весь ассортимент</span>
 			</div>
 			<div class="keyVal__item">

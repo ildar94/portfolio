@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  frontend:
+    build: ../frontend
+    container_name: frontend_dev_1
+    restart: always
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    volumes:
+      - type: bind
+        source: ../frontend/src
+        target: /app/src
+    stdin_open: true
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
