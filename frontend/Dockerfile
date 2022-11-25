@@ -1,14 +1,16 @@
 FROM node:latest
-WORKDIR /app
+WORKDIR usr/src/app
 EXPOSE 8080
 
-ARG NODE_ENV=development
-ENV NODE_ENV=${NODE_ENV}
 
 COPY package*.json ./
 
 
 RUN ls -la
+
+RUN ls -la ../
+
+RUN ls -la ../usr
 
 RUN npm install
 
