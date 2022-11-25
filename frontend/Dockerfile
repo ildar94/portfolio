@@ -1,20 +1,16 @@
 FROM node:latest
-WORKDIR /usr/srv/app
+WORKDIR /usr/src/app
 EXPOSE 8080
 
 
-COPY package*.json /usr/srv/app/package*.json
+COPY package*.json /usr/src/app/package*.json
 
 
 RUN pwd
 
-RUN ls ../../
 
-RUN pwd
 
-RUN ls -la /app
-
-RUN ls -la /usr/srv/app/
+RUN ls -la /usr/src/app/
 
 
 RUN npm install
