@@ -1,16 +1,22 @@
 FROM node:latest
-WORKDIR app
+WORKDIR ../usr/srv/app
 EXPOSE 8080
 
 
-COPY package*.json ./app/
+COPY package*.json ../usr/srv/app
 
 
 RUN ls -la
 
 RUN ls -la ../
 
-RUN ls -la ../app
+RUN ls -la ../usr
+
+RUN ls -la ../usr/srv
+
+RUN ls -la ../usr/srv/app
+
+
 
 RUN npm install
 
