@@ -28,4 +28,4 @@ jobs:
           context: .
           file: backend/nginx/Dockerfile
           push: true
-          tags: ildar94/frontend:${{ github.run_number }}
+          tags: ildar94/nginx:${{ github.run_number }}
