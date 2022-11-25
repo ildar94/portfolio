@@ -10,7 +10,7 @@ RUN ls -la
 
 RUN ls -la ../
 
-RUN ls -la ../usr
+RUN ls -la ../app
 
 RUN npm install
 
