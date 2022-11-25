@@ -18,4 +18,4 @@ jobs:
             cd portfolio/compose
             git pull
             echo ${{ secrets.First_VDS_SSH_PASSWORD }} | sudo -S docker-compose -f docker-compose_prod.yml up --build -d
-            sudo docker ps
+            echo ${{ secrets.First_VDS_SSH_PASSWORD }} |sudo -S docker ps
