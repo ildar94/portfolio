@@ -10,7 +10,7 @@ jobs:
 
 
       - name: Deploy on Server
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{ secrets.First_VDS_SSH_HOST }}
           username: ${{ secrets.First_VDS_SSH_USERNAME }}
