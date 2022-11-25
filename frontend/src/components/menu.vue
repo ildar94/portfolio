@@ -7,7 +7,7 @@
 					:key="item.id"
 					class="menu__item"
 				>
-					<router-link :to="`/#${index}`" custom v-slot="{ href, navigate }">
+					<router-link :to="item.slug" custom v-slot="{ href, navigate }">
 						<a
 							class="menu__link"
 							:class="index === activeCatIndex ? 'active' : ''"
@@ -17,7 +17,7 @@
 							<svg class="menu__icon">
 								<use :xlink:href="`#${item.icon}`"></use>
 							</svg>
-							<span class="menu__text">{{ item.text }}</span>
+							<span class="menu__text">{{ item.name }}</span>
 						</a>
 					</router-link>
 				</li>
