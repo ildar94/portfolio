@@ -10,7 +10,8 @@ COPY package*.json ./
 
 
 COPY . .
-
+RUN npm cache clean
+RUN npm install -g npm
 RUN npm install
 
 CMD ["npm", "run", "build"]
