@@ -3,12 +3,17 @@ WORKDIR /usr/src/app
 EXPOSE 8080
 
 RUN cd /usr/src/app
-COPY package*.json /usr/src/app/package*.json
+
+COPY package*.json .
 
 
 RUN pwd
 
 
+
+RUN ls -la /usr/src/app/
+
+COPY . .
 
 RUN ls -la /usr/src/app/
 
