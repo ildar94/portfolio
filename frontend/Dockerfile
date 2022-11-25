@@ -8,10 +8,8 @@ ENV NODE_ENV=${NODE_ENV}
 COPY package*.json ./
 
 
+RUN ls -la
 
-COPY . .
-RUN npm cache clean
-RUN npm install -g npm
 RUN npm install
 
 CMD ["npm", "run", "build"]
