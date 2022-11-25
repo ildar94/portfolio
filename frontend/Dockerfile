@@ -13,10 +13,13 @@ RUN pwd
 
 RUN ls -la /usr/src/app/
 
-COPY . .
+COPY /frontend .
 
 RUN ls -la /usr/src/app/
 
+RUN cd /usr/src/app/frontend
+
+RUN ls -la /usr/src/app/frontend/
 
 RUN npm install
 
