@@ -7,10 +7,11 @@ ENV NODE_ENV=${NODE_ENV}
 
 COPY package*.json ./
 
-RUN npm ci
+
 
 COPY . .
 
+RUN npm ci
 
 CMD ["npm", "run", "build"]
 
