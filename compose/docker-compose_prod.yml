@@ -8,8 +8,6 @@ services:
     container_name: frontend_prod
     ports:
       - 8080:8080
-    volumes:
-      - dist:/app/dist
     expose:
       - 8080
 
