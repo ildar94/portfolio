@@ -21,4 +21,3 @@ jobs:
           file: frontend/Dockerfile
           push: true
           tags: ildar94/frontend:latest, ildar94/frontend:${{ github.run_number }}
-          labels: ${{ steps.meta.outputs.labels }}
