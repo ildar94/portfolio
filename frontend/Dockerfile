@@ -17,9 +17,10 @@ COPY /frontend .
 
 RUN ls -la /usr/src/app/
 
-RUN cd /usr/src/app/frontend
+RUN cd /usr/src/app/
 
-RUN ls -la /usr/src/app/frontend/
+RUN pwd
+RUN ls -la .
 
 RUN npm install
 
