@@ -2,7 +2,9 @@ version: '3.7'
 
 services:
   frontend:
-    build: ../frontend
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile_prod
     container_name: frontend_prod
     ports:
       - 8080:8080
@@ -12,7 +14,9 @@ services:
       - 8080
 
   nginx:
-    build: ../backend/nginx
+    build:
+      context: ../backend/nginx
+      dockerfile: Dockerfile_prod
     container_name: nginx
     ports:
       - 80:80
