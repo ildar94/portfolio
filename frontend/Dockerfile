@@ -1,9 +1,9 @@
 FROM node:latest
-WORKDIR usr/src/app
+WORKDIR app
 EXPOSE 8080
 
 
-COPY package*.json ./
+COPY package*.json ./app/
 
 
 RUN ls -la
