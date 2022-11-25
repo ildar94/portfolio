@@ -13,18 +13,4 @@ services:
     expose:
       - 8080
 
-  nginx:
-    build:
-      context: ../backend/nginx
-      dockerfile: Dockerfile_prod
-    container_name: nginx
-    ports:
-      - 80:80
-    restart: on-failure
-    volumes:
-      - dist:/usr/share/nginx/html/
-    depends_on:
-      - frontend
 
-volumes:
-  dist:
