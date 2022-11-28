@@ -174,12 +174,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
-    "http://gilyazevs.ru",
-    "http://gilyazevs.ru:8000",
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost:80",
-    "http://gilyazevs.ru/",
-    "http://gilyazevs.ru:8000",
+
 
 ]
