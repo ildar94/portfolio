@@ -6,9 +6,51 @@ services:
       context: ../frontend
       dockerfile: Dockerfile_prod
     container_name: frontend_prod
+    volumes:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
     ports:
       - 80:80
     expose:
       - 80
+    depends_on:
+      - backend_api
+
+  backend_api:
+    build:
+      context: ../backend/back_store
+      dockerfile: Dockerfile
+    container_name: DRF
+    restart: always
+    command: bash entrypoint_prod.sh
+    volumes:
+      - static:/usr/src/app/static
+      - media:/usr/src/app/media
+    ports:
+      - 8000:8000
+    env_file:
+      - ../backend/back_store/.env.prod
+    depends_on:
+      - backend_db
+
+
+  backend_db:
+    image: postgres:12
+    container_name: backend_db
+    volumes:
+      - type: volume
+        source: pgdata
+        target: /var/lib/postgresql/data
+    env_file:
+      - ../backend/back_store/.env.prod
+    ports:
+      - 5432:5432
+
+
+volumes:
+  pgdata:
+    external: true
+  static:
+  media:
 
 
