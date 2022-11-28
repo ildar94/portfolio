@@ -177,6 +177,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost:80",
+    "http://gilyazevs.ru/"
 
 
 ]
