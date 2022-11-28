@@ -170,6 +170,10 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
+    "http://gilyazevs.ru/",
+    "https://gilyazevs.ru/",
+    "http://gilyazevs.ru:8000/",
+    "https://gilyazevs.ru:8000/",
     "http://localhost",
     "http://localhost:8000",
     "http://localhost:8080",
@@ -177,7 +181,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "http://localhost:80",
-    "http://gilyazevs.ru/"
+
+
 
 
 ]
