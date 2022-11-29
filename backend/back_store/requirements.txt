@@ -13,4 +13,5 @@ SQLAlchemy==1.4.39
 sqlparse==0.4.3
 pytils==0.4.1
 config==0.5.1
-
+django-redis==5.2.0
+redis==4.3.5
