@@ -15,7 +15,14 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import mixins
+from django.core.cache import cache
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
+CACHE_TTL = getattr(settings, 'CACHE_TTL', DEFAULT_TIMEOUT)
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.views.decorators.vary import vary_on_cookie
 
 def MainShop(request):
     category = Category.objects.all()
@@ -41,11 +48,10 @@ class ProductListRetrieveViewSet(mixins.ListModelMixin,
             serializer_class = ProductDetailSerializer
 
         return serializer_class
-
-
-
-
-
+    @method_decorator(vary_on_cookie)
+    @method_decorator(cache_page(60 * 60))
+    def dispatch(self, *args, **kwargs):
+        return super(ProductListRetrieveViewSet, self).dispatch(*args, **kwargs)
 
 
 class CategoryViewSet(viewsets.ViewSet):

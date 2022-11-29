@@ -9,6 +9,7 @@ services:
     volumes:
       - static:/usr/share/nginx/static
       - media:/usr/share/nginx/media
+      - ssl_nginx:/etc/nginx/ssl
     ports:
       - 80:80
     expose:
@@ -52,5 +53,6 @@ volumes:
     external: true
   static:
   media:
-
+  ssl_nginx:
+    external: true
 
