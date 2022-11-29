@@ -48,10 +48,10 @@ class ProductListRetrieveViewSet(mixins.ListModelMixin,
             serializer_class = ProductDetailSerializer
 
         return serializer_class
-    @method_decorator(vary_on_cookie)
-    @method_decorator(cache_page(60 * 60))
-    def dispatch(self, *args, **kwargs):
-        return super(ProductListRetrieveViewSet, self).dispatch(*args, **kwargs)
+    # @method_decorator(vary_on_cookie)
+    # @method_decorator(cache_page(60 * 60))
+    # def dispatch(self, *args, **kwargs):
+    #     return super(ProductListRetrieveViewSet, self).dispatch(*args, **kwargs)
 
 
 class CategoryViewSet(viewsets.ViewSet):
