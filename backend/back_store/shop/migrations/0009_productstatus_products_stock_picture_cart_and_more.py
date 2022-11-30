@@ -39,13 +39,7 @@ class Migration(migrations.Migration):
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.product')),
             ],
         ),
-        migrations.CreateModel(
-            name='Cart',
-            fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('product', models.ManyToManyField(to='shop.product')),
-            ],
-        ),
+
         migrations.CreateModel(
             name='AboutPproduct',
             fields=[

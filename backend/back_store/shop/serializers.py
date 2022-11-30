@@ -1,19 +1,10 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 from .models import *
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['url', 'username', 'email', 'groups']
-
-
-class GroupSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Group
-        fields = ['url', 'name']
-
+User = get_user_model()
 
 class ProductsSerializer(serializers.ModelSerializer):
     lookup_field = ('pk',)
@@ -83,3 +74,13 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+
+
+class CartListSerializer(serializers.ModelSerializer):
+    #username = serializers.SlugRelatedField(slug_field="username", read_only=True)
+    class Meta:
+        model = UsersCart_test
+        fields = '__all__'
+
+    def create(self, validated_data):
+        return UsersCart_test.objects.create(**validated_data)

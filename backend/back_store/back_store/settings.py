@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'shop',
     'rest_framework',
     'django_filters',
-    'corsheaders'
+    'corsheaders',
+    'rest_framework_simplejwt'
 ]
 
 MIDDLEWARE = [
@@ -166,7 +167,12 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
 }
 
 CORS_ALLOWED_ORIGINS = [

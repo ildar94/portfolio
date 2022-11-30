@@ -3,6 +3,7 @@ from django.db import models
 from pytils.translit import slugify
 from django.contrib.postgres.fields import JSONField
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 import os
 from django.conf import settings
 # Create your models here.
@@ -118,14 +119,30 @@ class ProductMaxVersion(models.Model):
 
 
 
+#User = get_user_model()
 
-class Cart(models.Model):
-    user = models.OneToOneField(
-        get_user_model(),
-        primary_key=True,
-        on_delete=models.CASCADE,
-    )
-    product = models.ManyToManyField(Product)
+# class UsersCart(models.Model):
+#     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Carts")
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_product", null=True)
+#     quantity = models.PositiveIntegerField(null=True)
+#
+#
+#
+
+
+class UsersCart_test(models.Model):
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_product_test", null=True)
+    quantity = models.PositiveIntegerField(null=True)
+
+
+
+
+
+
+
+
+
 
 ##################################EAV-technology########################################
 
