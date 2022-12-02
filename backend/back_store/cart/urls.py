@@ -4,7 +4,7 @@ from django.urls import path, include
 from .views import CartViewSet, CartItemViewSet
 
 router = routers.DefaultRouter()
-router.register(r'carts',CartViewSet)
+router.register(r'carts',CartViewSet, basename='cart')
 
 
 cart_router = routers.NestedDefaultRouter(router, 'carts', lookup='cart')

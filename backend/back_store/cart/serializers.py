@@ -30,7 +30,7 @@ class AddCartItemSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()
 
     def validate_product_id(self, value):
-        if not Product.objects.filter(pk=value).exist():
+        if not Product.objects.filter(pk=value).exists():
             raise serializers.ValidationError("No product with given id was found")
         return value
 
