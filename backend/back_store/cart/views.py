@@ -1,29 +1,12 @@
-from django.shortcuts import render
-from rest_framework import viewsets, permissions
-from  .models import Cart, CartItem
+from .models import Cart, CartItem
 from .serializers import CartSerializer, CartItemSerializer, AddCartItemSerializer, UpdateCartItemSerializer
-from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 # Create your views here.
 
 
 
-# class OrdersViewSet(viewsets.ModelViewSet):
-#     queryset = Orders.objects.all().order_by('-id')
-#     serializer_class = OrdersSerializer
-#     permission_classes = (IsAuthenticated,)
-#
-#     def get_queryset(self):
-#         user = self.request.user
-#         queryset = self.queryset.filter(owner=user)
-#         return queryset
-#
-#     def perform_create(self, serializer):
-#         serializer.save(owner=self.request.user)
 
 
 class CartViewSet(ListModelMixin,
