@@ -51,9 +51,8 @@ class Product(models.Model):
     description = models.TextField(null=True, blank=True)
     sales_price = models.FloatField(null=True,blank=True)
     sold_time = models.IntegerField(null=True, blank=True)
-    category_id = models.ForeignKey(Category, on_delete=models.PROTECT, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, to_field='slug', related_name='products', default='elektrosamokatyi')
     attrs = models.JSONField(null=True, blank=True)
-    #product_addtitionals = models.ManyToManyField(ProductAdditionals)
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -81,7 +80,7 @@ class ProductAdditionals(models.Model):
 
 class Picture(models.Model):
     images = models.ImageField(null=True,blank=True, upload_to=product_picture_directory_path)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,  related_name='pictures')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,  related_name='images')
 
 
 class AboutProduct(models.Model):
@@ -116,28 +115,6 @@ class ProductMaxVersion(models.Model):
     title = models.CharField(max_length=255, null=True)
     icon = models.ImageField(null=True,blank=True, upload_to=product_picture_directory_path)
     description = models.TextField(null=True)
-
-
-
-#User = get_user_model()
-
-# class UsersCart(models.Model):
-#     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name="Carts")
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_product", null=True)
-#     quantity = models.PositiveIntegerField(null=True)
-#
-#
-#
-
-
-class UsersCart_test(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="cart_product_test", null=True)
-    quantity = models.PositiveIntegerField(null=True)
-
-
-
-
 
 
 

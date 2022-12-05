@@ -20,22 +20,16 @@ from django.contrib.auth.models import User
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
+from rest_framework.pagination import PageNumberPagination
 
-def MainShop(request):
-    category = Category.objects.all()
-    product = Product.objects.all()
-    data = {
-        'category' : category,
-        'product' : product
-    }
-    return render(request, 'shop/index.html', data)
+# 'total_count': self.page.paginator.count,
+# 'page_size': self.page_size,
 
 
 
 class ProductListRetrieveViewSet(mixins.ListModelMixin,
                                 mixins.RetrieveModelMixin,
                                 viewsets.GenericViewSet):
-
 
     queryset = Product.objects.all().order_by("id")
     def get_serializer_class(self):
@@ -45,10 +39,10 @@ class ProductListRetrieveViewSet(mixins.ListModelMixin,
             serializer_class = ProductDetailSerializer
 
         return serializer_class
-    @method_decorator(vary_on_cookie)
-    @method_decorator(cache_page(60 * 60))
-    def dispatch(self, *args, **kwargs):
-        return super(ProductListRetrieveViewSet, self).dispatch(*args, **kwargs)
+    # @method_decorator(vary_on_cookie)
+    # @method_decorator(cache_page(60 * 60))
+    # def dispatch(self, *args, **kwargs):
+    #     return super(ProductListRetrieveViewSet, self).dispatch(*args, **kwargs)
 
 
 class CategoryViewSet(viewsets.ViewSet):
@@ -63,38 +57,4 @@ class CategoryViewSet(viewsets.ViewSet):
         category = get_object_or_404(queryset, name=pk)
         serializer = CategoryDetailSerializer(category)
         return Response(serializer.data)
-
-
-class CartViewSet(viewsets.ViewSet):
-    permission_classes = (IsAuthenticated,)
-    def list(self, request):
-        queryset = UsersCart_test.objects.all()
-        serializer = CartListSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def create(self, request):
-        print(request.data)
-        serializer = CartListSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response({'post': serializer.data})
-
-
-# class CartViewSet(viewsets.ModelViewSet):
-#     queryset = UsersCart_test.objects.all()
-#     serializer_class = CartListSerializer
-#     permission_classes = (IsAuthenticated,)
-#     @action(detail=False, methods=['post'])
-#     def add_to_cart(self, request, pk=None):
-#         pass
-        # q = User.objects.get(username=request.data['username'])
-        # serializer = CartListSerializer(data=request.data)
-        # if serializer.is_valid():
-        #     user.set_password(serializer.validated_data['password'])
-        #     user.save()
-        #     return Response({'status': 'password set'})
-        # else:
-        #     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
 

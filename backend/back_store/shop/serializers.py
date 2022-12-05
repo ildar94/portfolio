@@ -1,17 +1,8 @@
-from django.contrib.auth import get_user_model
-
 from rest_framework import serializers
 from .models import *
 
+#---------Section for Product related models--------#
 
-User = get_user_model()
-
-class ProductsSerializer(serializers.ModelSerializer):
-    lookup_field = ('pk',)
-    category_id = serializers.SlugRelatedField(slug_field="name", read_only=True)
-    class Meta:
-        model = Product
-        fields = '__all__'
 class ProductAdditionalSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductAdditionals
@@ -34,39 +25,47 @@ class ProductMaxVersionSerializer(serializers.ModelSerializer):
         fields = ['title', 'description']
 
 
+#---------END OF Section for Product related models--------#
+
+
+class ProductsSerializer(serializers.ModelSerializer):
+    lookup_field = ('pk',)
+    #category = serializers.SlugRelatedField(slug_field="name", read_only=True)
+    images = ProductPictureSerializer(many=True)
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'slug', 'category', 'article', 'price', 'description', 'sales_price', 'sold_time', 'images', 'attrs']
+
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     additionals =ProductAdditionalSerializer(many=True)
-    pictures = ProductPictureSerializer(many=True)
+    images = ProductPictureSerializer(many=True)
     about = AboutProductSerializer(many=True)
     max_version = ProductMaxVersionSerializer(many=True)
     class Meta:
         model = Product
         fields = '__all__'
 
-class ProductsPriceSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = ["price"]
 
 
-class returnnone():
-    data = {"price": None}
+#--------------Category-----------#
+
+
 class CategoryListSerializer(serializers.ModelSerializer):
-    products = serializers.SerializerMethodField()
+    price = serializers.SerializerMethodField()
     class Meta:
         model = Category
         fields = '__all__'
 
-    def get_products(self, obj):
-        product_price1 = Product.objects.filter(category_id=obj.id)
-        #print(len(product_price1))
-        if len(product_price1) != 0:
-            product_price = Product.objects.filter(category_id=obj.id).order_by("price")[0]
-            serializer = ProductsPriceSerializer(product_price)
+
+    def get_price(self, obj) :
+        if not Product.objects.filter(category=obj.slug).exists():
+            price = None
         else:
-            serializer = returnnone()
-        return serializer.data
+            product_price = Product.objects.filter(category=obj.slug).order_by("price")[0]
+            price = product_price.price
+        return price
+
 
 
 class CategoryDetailSerializer(serializers.ModelSerializer):
@@ -75,12 +74,3 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
-
-class CartListSerializer(serializers.ModelSerializer):
-    #username = serializers.SlugRelatedField(slug_field="username", read_only=True)
-    class Meta:
-        model = UsersCart_test
-        fields = '__all__'
-
-    def create(self, validated_data):
-        return UsersCart_test.objects.create(**validated_data)
