@@ -8,6 +8,7 @@ from .serializers import *
 #import django_filters.rest_framework
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
+from rest_framework.views import APIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework import mixins
 from django.core.cache import cache
@@ -21,9 +22,6 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from rest_framework.pagination import PageNumberPagination
-
-# 'total_count': self.page.paginator.count,
-# 'page_size': self.page_size,
 
 
 
@@ -50,6 +48,17 @@ class CategoryViewSet(viewsets.ViewSet):
     def list(self, request):
         queryset = Category.objects.all().order_by("id")
         serializer = CategoryListSerializer(queryset, many=True)
+        respone  = Response(serializer.data)
+        if request.user.is_authenticated:
+            print("request user --------->>>>>>>>>>>", self.request.user)
+            print("request cockie --------->>>>>>>>>>>", self.request.COOKIES)
+        else:
+            print("session_key",request.session._get_session_key())
+            if  request.session.session_key is None:
+                request.session.save()
+                print("session_key after save()", request.session.session_key)
+                respone.set_cookie('cart_id', request.session.session_key)
+
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):

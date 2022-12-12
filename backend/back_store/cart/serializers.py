@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.contrib.sessions.models import Session
 from .models import Cart, CartItem
 from rest_framework import serializers
 from shop.models import Product
@@ -73,4 +74,22 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ['id', 'user', 'items', 'total_price']
 
 
+
+
+class CartAnonymousSerializer(serializers.ModelSerializer):
+    id = serializers.UUIDField(read_only=True)
+    items = CartItemSerializer(many=True, read_only=True)
+    total_price = serializers.SerializerMethodField()
+    def get_total_price(self, cart):
+        return sum([item.quantity * item.product.price for item in cart.items.all()])
+
+    def save(self, **kwargs):
+        print("kwargs->>>", kwargs)
+        print("context", self.context)
+        session = Session.objects.get(session_key =self.context['session_key'])
+        Cart.objects.create(session=session)
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'session', 'items', 'total_price']
 
