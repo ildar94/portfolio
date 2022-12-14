@@ -52,7 +52,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
-    price = serializers.SerializerMethodField()
+    min_price = serializers.SerializerMethodField()
     class Meta:
         model = Category
         fields = '__all__'
@@ -60,11 +60,11 @@ class CategoryListSerializer(serializers.ModelSerializer):
 
     def get_price(self, obj) :
         if not Product.objects.filter(category=obj.slug).exists():
-            price = None
+            min_price = None
         else:
             product_price = Product.objects.filter(category=obj.slug).order_by("price")[0]
-            price = product_price.price
-        return price
+            min_price = product_price.price
+        return min_price
 
 
 

@@ -49,16 +49,6 @@ class CategoryViewSet(viewsets.ViewSet):
         queryset = Category.objects.all().order_by("id")
         serializer = CategoryListSerializer(queryset, many=True)
         respone  = Response(serializer.data)
-        if request.user.is_authenticated:
-            print("request user --------->>>>>>>>>>>", self.request.user)
-            print("request cockie --------->>>>>>>>>>>", self.request.COOKIES)
-        else:
-            print("session_key",request.session._get_session_key())
-            if  request.session.session_key is None:
-                request.session.save()
-                print("session_key after save()", request.session.session_key)
-                respone.set_cookie('cart_id', request.session.session_key)
-
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):

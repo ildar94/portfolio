@@ -35,17 +35,6 @@ class CartViewSet(ListModelMixin,
                     except IntegrityError:
                         print("integerity -> already_exist product ->>>", item.product_id )
                         item.delete()
-    def get_queryset(self):
-        if self.request.user.is_authenticated != True:
-            return Cart.objects.filter(session=self.request.session.session_key)
-        self.concast_cart()
-        return Cart.objects.filter(user=self.request.user)
-    def get_serializer_class(self):
-        if self.request.user.is_authenticated !=True:
-            return CartAnonymousSerializer
-        self.concast_cart()
-        return CartSerializer
-
 
     def create(self, request, *args, **kwargs):
         if  request.user.is_authenticated !=True:
@@ -62,7 +51,27 @@ class CartViewSet(ListModelMixin,
             headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-
+    def check_exist(self):
+        if self.request.session.session_key:
+            try:
+                Cart.objects.get(session=self.request.session.session_key)
+            except Cart.DoesNotExist:
+                self.create(self.request)
+        else:
+            self.request.session.save()
+            self.create(self.request)
+    def get_queryset(self):
+        if self.request.user.is_authenticated != True:
+            self.check_exist()
+            return Cart.objects.filter(session=self.request.session.session_key)
+        self.concast_cart()
+        return Cart.objects.filter(user=self.request.user)
+    def get_serializer_class(self):
+        if self.request.user.is_authenticated !=True:
+            self.check_exist()
+            return CartAnonymousSerializer
+        self.concast_cart()
+        return CartSerializer
 
 
 

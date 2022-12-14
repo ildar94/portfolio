@@ -9,7 +9,7 @@ from uuid import uuid4
 
 
 class Cart(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4())
+    id = models.UUIDField(primary_key=True, default=uuid4)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='username', related_name='user', blank=True, null=True)
     created_at  =models.DateTimeField(auto_now_add=True)
     session = models.ForeignKey(Session, on_delete=models.SET_NULL, blank=True, null=True)
