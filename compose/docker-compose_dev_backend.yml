@@ -11,6 +11,9 @@ services:
     volumes:
       - static:/usr/src/app/static
       - media:/usr/src/app/media
+      - type: bind
+        source: ../backend/back_store
+        target: /usr/src/app
     environment:
       - REDIS_HOST=redis
     ports:

@@ -2,6 +2,7 @@ from django.core.validators import MinValueValidator
 from django.contrib.sessions.models import Session
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 from shop.models import Product
 from uuid import uuid4
 # Create your models here.
@@ -9,7 +10,7 @@ from uuid import uuid4
 
 class Cart(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4())
-    user = models.ForeignKey(User, on_delete=models.CASCADE, to_field='username', related_name='user', blank=True, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, to_field='username', related_name='user', blank=True, null=True)
     created_at  =models.DateTimeField(auto_now_add=True)
     session = models.ForeignKey(Session, on_delete=models.SET_NULL, blank=True, null=True)
 

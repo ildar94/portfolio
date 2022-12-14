@@ -6,6 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.response import Response
+from psycopg2.errors import UniqueViolation
+from django.db.utils import IntegrityError
 
 # Create your views here.
 
@@ -17,17 +19,31 @@ class CartViewSet(ListModelMixin,
                   DestroyModelMixin,
                   CreateModelMixin,
                   GenericViewSet):
-    #queryset = Cart.objects.prefetch_related('items__product').all()
-    #serializer_class = CartSerializer
     pagination_class = None
 
+    def concast_cart(self):
+        if Cart.objects.filter(session=self.request.session.session_key):
+            cart_id_anonym = Cart.objects.get(session=self.request.session.session_key).id
+            cart_id_user = Cart.objects.get(user=self.request.user).id
+            if CartItem.objects.filter(cart_id=cart_id_anonym):
+                for item in CartItem.objects.filter(cart_id=cart_id_anonym):
+                    try:
+                        item.cart_id=cart_id_user
+                        item.save()
+                    except UniqueViolation:
+                        print("already exist")
+                    except IntegrityError:
+                        print("integerity -> already_exist product ->>>", item.product_id )
+                        item.delete()
     def get_queryset(self):
         if self.request.user.is_authenticated != True:
             return Cart.objects.filter(session=self.request.session.session_key)
+        self.concast_cart()
         return Cart.objects.filter(user=self.request.user)
     def get_serializer_class(self):
         if self.request.user.is_authenticated !=True:
             return CartAnonymousSerializer
+        self.concast_cart()
         return CartSerializer
 
 

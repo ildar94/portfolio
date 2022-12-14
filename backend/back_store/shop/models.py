@@ -2,8 +2,6 @@ from django.db import models
 #from django.utils.text import slugify
 from pytils.translit import slugify
 from django.contrib.postgres.fields import JSONField
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User
 import os
 from django.conf import settings
 # Create your models here.

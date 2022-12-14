@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'cart',
+    'users',
     'rest_framework',
     'django_filters',
     "debug_toolbar",
+    "phonenumber_field",
     'corsheaders',
     'rest_framework_simplejwt'
 ]
@@ -257,3 +259,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+AUTH_USER_MODEL = 'users.User'
