@@ -25,7 +25,7 @@ services:
       dockerfile: Dockerfile
     container_name: DRF
     restart: always
-    command: bash entrypoint_prod.sh
+    command: bash entrypoint.sh
     environment:
       - REDIS_HOST=redis
     volumes:
