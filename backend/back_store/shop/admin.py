@@ -33,14 +33,26 @@ class ProductsStockInline(StackedInline):
     extra = 1
     model = ProductsStock
 
+class SubCategoryItemInline(StackedInline):
+    extra = 1
+    model = SubCategoryItem
 
+class SubCategoryInline(StackedInline):
+    extra = 1
+    model = SubCategory
 
-
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ("category", "type")
+    inlines = (SubCategoryItemInline, )
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "icon")
+    inlines = (SubCategoryInline, )
+
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

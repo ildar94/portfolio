@@ -58,7 +58,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-    def get_price(self, obj) :
+    def get_min_price(self, obj) :
         if not Product.objects.filter(category=obj.slug).exists():
             min_price = None
         else:
@@ -74,3 +74,28 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+
+class MenuTypeItemSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SubCategoryItem
+        fields = ['item']
+class MenuTypeSerializer(serializers.ModelSerializer):
+    #items = serializers.SerializerMethodField()
+    #items = serializers.StringRelatedField(many=True, read_only=True)
+    item = MenuTypeItemSerializer(many=True, read_only=True)
+    class Meta:
+        model = SubCategory
+        fields = ['type', 'item']
+
+
+    # def get_items(self, obj):
+    #     print("self ---->>>",self)
+    #     print("obj ----->>>>", obj)
+    #     items = SubCategoryItem.objects.filter(subcategory = obj.id)
+    #     return items
+class MenuSerializer(serializers.ModelSerializer):
+    submenu = MenuTypeSerializer(many=True, read_only=True)
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'slug', 'icon', 'submenu']

@@ -9,6 +9,22 @@ from django.conf import settings
 #################################JSONField-technology###################################
 
 
+def product_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+
+    this_path = os.getcwd
+    path = os.path.join(settings.MEDIA_ROOT, r'images')
+    path += r"\\products\\" + str(instance.slug) + r"\\" + filename
+    return path
+
+
+def product_picture_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    this_path = os.getcwd
+    path = os.path.join(settings.MEDIA_ROOT, r'images')
+    path += r"\\products\\" + str(instance.product.slug) + r"\\" + filename
+    return path
+
 
 class Category(models.Model):
 
@@ -24,23 +40,24 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-def product_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
 
-    this_path = os.getcwd
-    path = os.path.join(settings.MEDIA_ROOT,  r'images')
-    path += r"\\products\\" + str(instance.slug) + r"\\" + filename
-    return path
-def product_picture_directory_path(instance, filename):
-    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
-    this_path = os.getcwd
-    path = os.path.join(settings.MEDIA_ROOT,  r'images')
-    path += r"\\products\\" + str(instance.product.slug) + r"\\" + filename
-    return path
 
+class SubCategory(models.Model):
+
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, to_field='slug',  related_name='submenu' ,null=True, blank=True)
+    type = models.CharField(max_length=120, null=True, blank=True)
+
+    def __str__(self):
+        return self.type
+class SubCategoryItem(models.Model):
+
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE,  related_name='item', null=True, blank=True)
+    item = models.CharField(max_length=120, null=True, blank=True)
+
+    def __str__(self):
+        return self.item
 
 class Product(models.Model):
-
     name = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True, blank=True)
     article = models.IntegerField(blank=False)
@@ -51,6 +68,7 @@ class Product(models.Model):
     sold_time = models.IntegerField(null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, to_field='slug', related_name='products', default='elektrosamokatyi')
     attrs = models.JSONField(null=True, blank=True)
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)

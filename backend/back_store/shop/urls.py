@@ -7,6 +7,8 @@ from django.urls import path, include
 router = routers.DefaultRouter()
 router.register(r'products', views.ProductListRetrieveViewSet,basename='product')
 router.register(r'category', views.CategoryViewSet, basename='category')
+router.register(r'menu', views.MenuViewSet, basename='menu')
+
 
 #urlpatterns = router
 urlpatterns = [

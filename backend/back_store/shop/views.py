@@ -57,3 +57,10 @@ class CategoryViewSet(viewsets.ViewSet):
         serializer = CategoryDetailSerializer(category)
         return Response(serializer.data)
 
+
+class MenuViewSet(viewsets.ViewSet):
+    def list(self, request):
+        queryset = Category.objects.all()
+        serializer = MenuSerializer(queryset, many=True)
+        print("serializer.data --->>>>>", serializer.data)
+        return Response(serializer.data)
