@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'users',
+    'promo',
     'rest_framework',
     'django_filters',
     "debug_toolbar",
