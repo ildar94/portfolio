@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from shop import views as shop_views
 from cart import views as cart_views
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -38,9 +39,9 @@ from rest_framework_simplejwt.views import TokenVerifyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('api/v1/', include(('shop.urls', 'cart.urls'))),
-    path('api/v1/', include('shop.urls')),
-    path('api/v1/', include('cart.urls')),
+    path('api/v1/shop/', include('shop.urls')),
+    path('api/v1/cart/', include('cart.urls')),
+    path('api/v1/promo/', include('promo.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api//v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
