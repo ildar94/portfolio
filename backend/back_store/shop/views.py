@@ -5,7 +5,9 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from django.shortcuts import get_object_or_404
 from .serializers import *
-#import django_filters.rest_framework
+import django_filters
+from django_filters import rest_framework as filters
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
 from rest_framework.views import APIView
@@ -24,6 +26,22 @@ from django.views.decorators.vary import vary_on_cookie
 from rest_framework.pagination import PageNumberPagination
 
 
+class ProductFilter(filters.FilterSet):
+    #min_price = filters.NumberFilter(field_name="price", lookup_expr='gte')
+    #max_price = filters.NumberFilter(field_name="price", lookup_expr='lte')
+    productstatus = django_filters.CharFilter(method = 'filter_badge')
+    class Meta:
+        model = Product
+        fields = ['productstatus']
+    def filter_badge(self, queryset, name, value):
+        print("self ->>", self)
+        print("queryset", queryset)
+        print("name", name)
+        print("value", value)
+        resp = Product.objects.filter(productstatus__badge=value)
+        print("resp ->>", resp)
+        return resp
+
 
 class ProductListRetrieveViewSet(mixins.ListModelMixin,
                                 mixins.RetrieveModelMixin,
@@ -37,6 +55,9 @@ class ProductListRetrieveViewSet(mixins.ListModelMixin,
             serializer_class = ProductDetailSerializer
 
         return serializer_class
+
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = ProductFilter
     # @method_decorator(vary_on_cookie)
     # @method_decorator(cache_page(60 * 60))
     # def dispatch(self, *args, **kwargs):

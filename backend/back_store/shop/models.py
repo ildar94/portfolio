@@ -113,10 +113,12 @@ class ProductStatus(models.Model):
     ]
     HIT = 'HIT'
     LATEST = 'latest'
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='productstatus')
     text = models.CharField(max_length=100,blank=True,null=True)
     badge = models.CharField(max_length=10, choices=STATUSBADGE, default=HIT, blank=True, null=True)
 
+    def __str__(self):
+        return str(self.badge)
 
 
 class ProductsStock(models.Model):
