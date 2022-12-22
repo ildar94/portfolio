@@ -9,7 +9,7 @@ class Menu {
 	}
 
 	public get(): Promise<AxiosResponse> {
-		return this.api.get('category/');
+		return this.api.get('shop/menu/');
 	}
 }
 

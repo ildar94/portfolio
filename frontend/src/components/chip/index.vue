@@ -104,22 +104,26 @@ export default defineComponent({
 			border-color: $background;
 		}
 
+		&_circle_small,
+		&_circle_medium,
+		&_circle_large {
+			border-radius: 50%;
+			padding: 0;
+		}
+
 		&_circle_small {
 			width: 30px;
 			height: 30px;
-			border-radius: 50%;
 		}
 
 		&_circle_medium {
 			width: 40px;
 			height: 40px;
-			border-radius: 50%;
 		}
 
 		&_circle_large {
 			width: 50px;
 			height: 50px;
-			border-radius: 50%;
 		}
 	}
 </style>

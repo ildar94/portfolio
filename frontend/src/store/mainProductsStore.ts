@@ -1,20 +1,23 @@
 import { defineStore } from 'pinia';
-import { ProductCardProps } from '@/components/productCard/types';
 import MainProducts from '@/api/mainProducts';
-import { AxiosResponse } from 'axios';
+import { ProductI } from '@/api/mainProducts/types';
 
 const mainProducts = new MainProducts();
 
 export const useMainProductsStore = defineStore('mainProductsStore', {
 	state: () => ({
-		products: [] as ProductCardProps[],
+		products: [] as ProductI[],
 	}),
 	actions: {
 		async get(): Promise<void> {
-			const response: AxiosResponse = await mainProducts.get();
+			try {
+				const response = await mainProducts.get();
 
-			if (response.status === 200) {
-				this.products = response.data;
+				if (response.status === 200) {
+					this.products = response.data.results;
+				}
+			} catch (e) {
+				console.warn(e);
 			}
 		},
 	},

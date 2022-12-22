@@ -1,5 +1,6 @@
 import { api } from '@/api';
 import { AxiosResponse, AxiosInstance } from 'axios';
+import { ProductsResponseHeadI } from '@/api/mainProducts/types';
 
 class mainProducts {
 	private api: AxiosInstance;
@@ -8,8 +9,8 @@ class mainProducts {
 		this.api = api;
 	}
 
-	public get(): Promise<AxiosResponse> {
-		return this.api.get('mainProducts');
+	public get(): Promise<AxiosResponse<ProductsResponseHeadI>> {
+		return this.api.get('products/');
 	}
 }
 

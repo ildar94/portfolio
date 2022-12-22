@@ -7,8 +7,9 @@ const promoApi: Promo = new Promo();
 interface mainBannerItemInterface {
 	id: string;
 	title: string;
-	desc: string;
+	description: string;
 	image: string;
+	category: string;
 }
 
 export const usePromoStore = defineStore('promoStore', {
@@ -17,10 +18,10 @@ export const usePromoStore = defineStore('promoStore', {
 	}),
 	actions: {
 		async getMainBanner(): Promise<void> {
-			const response: AxiosResponse = await promoApi.get();
+			const response: AxiosResponse = await promoApi.getMainBanner();
 
 			if (response.status === 200) {
-				this.mainBanner = response.data?.mainBanner;
+				this.mainBanner = response.data?.results;
 			}
 		},
 	},

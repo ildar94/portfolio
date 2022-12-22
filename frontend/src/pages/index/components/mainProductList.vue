@@ -9,15 +9,24 @@
 				<AppButton color="tertiary" mod="fill">Для детей</AppButton>
 			</div>
 		</div>
-		<ProductList :products="mainProducts.products" />
+		<div class="productList">
+			<div class="productList__item" v-for="item in mainProducts.products.slice(0, 8)" :key="item.id">
+				<ProductCard
+					:name="item.name"
+					:price="item.price"
+					:pictures="item.product_image"
+					:sales_price="item.sales_price"
+				/>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AppButton from '@/components/button/index.vue';
-import ProductList from '@/components/productList.vue';
 import { useMainProductsStore } from '@/store/mainProductsStore';
+import ProductCard from '@/components/productCard/index.vue';
 
 export default defineComponent({
 	name: 'MainProductList',
@@ -32,7 +41,7 @@ export default defineComponent({
 	},
 	components: {
 		AppButton,
-		ProductList,
+		ProductCard,
 	},
 });
 </script>
@@ -40,6 +49,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 	@import '@/assets/css/modules/var';
 	@import '@/assets/css/modules/polygraphy';
+	@import '@/assets/css/components/productList';
 
 	.mainProductList {
 		margin-top: 75px;
