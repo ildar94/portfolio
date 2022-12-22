@@ -27,20 +27,25 @@ from rest_framework.pagination import PageNumberPagination
 
 
 class ProductFilter(filters.FilterSet):
-    #min_price = filters.NumberFilter(field_name="price", lookup_expr='gte')
-    #max_price = filters.NumberFilter(field_name="price", lookup_expr='lte')
+    min_price = filters.NumberFilter(field_name="price", lookup_expr='gte')
+    max_price = filters.NumberFilter(field_name="price", lookup_expr='lte')
     productstatus = django_filters.CharFilter(method = 'filter_badge')
+    type = django_filters.CharFilter(method = 'filter_type')
+    for_whom = django_filters.CharFilter(method = 'filter_for_whom')
     class Meta:
         model = Product
         fields = ['productstatus']
     def filter_badge(self, queryset, name, value):
-        print("self ->>", self)
-        print("queryset", queryset)
-        print("name", name)
-        print("value", value)
-        resp = Product.objects.filter(productstatus__badge=value)
-        print("resp ->>", resp)
-        return resp
+        return Product.objects.filter(productstatus__badge=value)
+
+    def filter_type(self, queryset, name, value):
+        return Product.objects.filter(attrs__Тип=value)
+
+    def filter_for_whom(self, queryset, name, value):
+        lookup = "attrs__Для кого"
+        return Product.objects.filter(**{lookup:value})
+
+
 
 
 class ProductListRetrieveViewSet(mixins.ListModelMixin,
@@ -74,7 +79,7 @@ class CategoryViewSet(viewsets.ViewSet):
 
     def retrieve(self, request, pk=None):
         queryset = Category.objects.all()
-        category = get_object_or_404(queryset, name=pk)
+        category = get_object_or_404(queryset, slug=pk)
         serializer = CategoryDetailSerializer(category)
         return Response(serializer.data)
 
