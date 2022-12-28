@@ -94,6 +94,10 @@ export default defineComponent({
 			background-color: #fff;
 		}
 
+		&_whiteDeep_fill:not(&_hover):hover {
+			background-color: $primary;
+		}
+
 		&_hover.chip_primary_stroke:hover,
 		&_hover.chip_secondary_stroke:hover {
 			color: #fff;

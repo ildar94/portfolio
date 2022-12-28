@@ -4,19 +4,20 @@
 	font-size: 14px;
 	font-weight: 500;
 
-	&_primary {
+	&.primary {
 		background-color: $primary;
+
 	}
 
-	&_secondary {
+	&.secondary {
 		background-color: $secondary;
 	}
 
-	&_danger {
+	&.danger {
 		background-color: $danger;
 	}
 
-	&_success {
+	&.success {
 		background: $success-500;
 		color: #fff;
 	}

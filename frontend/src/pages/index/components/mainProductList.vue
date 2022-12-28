@@ -14,8 +14,12 @@
 				<ProductCard
 					:name="item.name"
 					:price="item.price"
-					:pictures="item.product_image"
+					:images="item.images"
 					:sales_price="item.sales_price"
+					:features="item?.features"
+					:is-in-cart="item?.is_in_cart"
+					:is-in-compare="item?.is_in_compare"
+					:is-in-favorites="item?.is_in_favorites"
 				/>
 			</div>
 		</div>

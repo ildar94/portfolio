@@ -1,42 +1,67 @@
 <template>
 	<div class="productCard">
 		<div class="productCard__top">
-			<div class="productCard__status badge badge_success" :class="statusCssMap">Новинка</div>
-			<AppChip class="productCard__compare" tag="button" color="white" circle="medium" aria-label="Добавить в сравнение" type="button">
+			<div v-if="status" class="productCard__status badge" :class="statusCssMap">{{ status.text }}</div>
+			<AppChip
+				class="productCard__compare"
+				:class="isInCompare ? 'active' : ''"
+				tag="button"
+				color="white"
+				circle="medium"
+				aria-label="Добавить в сравнение"
+				type="button"
+			>
 				<CompareIcon />
 			</AppChip>
 			<Swiper class="productCard__slider">
-				<SwiperSlide class="productCard__slide">
-					<img src="" alt="" @error="changeImageOnError">
+				<SwiperSlide v-for="image in images" :key="image.images" class="productCard__slide">
+					<img class="productCard__img" :src="image.images" alt="" @error="changeImageOnError">
 				</SwiperSlide>
-				<SwiperSlide class="productCard__slide">
-					<img src="" alt="" @error="changeImageOnError">
-				</SwiperSlide>
-				<SwiperSlide class="productCard__slide">
-					<img src="" alt="" @error="changeImageOnError">
+				<SwiperSlide v-if="!images || !images.length">
+					<img class="productCard__img" :src="require('@/assets/img/misc/product.png')" alt="">
 				</SwiperSlide>
 				<SwiperArrow class="productCard__arrow productCard__arrow_prev" type="prev" />
 				<SwiperArrow class="productCard__arrow productCard__arrow_next" type="next" />
 			</Swiper>
 		</div>
 		<div class="productCard__info">
-			<h3 class="productCard__title">Kugoo Kirin M4</h3>
-			<div class="productCard__features features">
-				<AppFeature class="features__item" text="2000 mAh" icon="accumulator"></AppFeature>
-				<AppFeature class="features__item" text="1,2 л.с." icon="power"></AppFeature>
-				<AppFeature class="features__item" text="60 км/ч" icon="speedometer"></AppFeature>
-				<AppFeature class="features__item" text="5 часов" icon="timer"></AppFeature>
+			<h3 class="productCard__title">{{ name }}</h3>
+			<div v-if="features && features.length" class="productCard__features features">
+				<AppFeature
+					v-for="feature in features"
+					:key="feature.text"
+					class="features__item"
+					:text="feature.text"
+					:icon="feature.icon" />
 			</div>
 			<div class="productCard__row">
 				<div class="productCard__prices">
-					<div class="productCard__common">39 900 ₽</div>
-					<div class="productCard__price">39 900 ₽</div>
+					<div class="productCard__common">{{ sales_price }}</div>
+					<div class="productCard__price">{{ price }}</div>
 				</div>
 				<div class="productCard__row">
-					<AppChip class="productCard__chip " tag="button" color="white" mod="stroke" circle="medium" type="button" aria-label="Добавить в корзину">
+					<AppChip
+						class="productCard__chip"
+						:class="isInCart ? 'active' : ''"
+						tag="button"
+						color="white"
+						mod="stroke"
+						circle="medium"
+						type="button"
+						aria-label="Добавить в корзину"
+					>
 						<CartIcon />
 					</AppChip>
-					<AppChip class="productCard__chip" tag="button" color="white" mod="stroke" circle="medium" type="button" aria-label="Добавить в избранное">
+					<AppChip
+						class="productCard__chip"
+						:class="isInFavorites ? 'active' : ''"
+						tag="button"
+						color="white"
+						mod="stroke"
+						circle="medium"
+						type="button"
+						aria-label="Добавить в избранное"
+					>
 						<FavoritesIcon />
 					</AppChip>
 				</div>
@@ -65,7 +90,7 @@ export default defineComponent({
 			type: String,
 			required: true,
 		},
-		pictures: {
+		images: {
 			type: Array as () => string[],
 			default: () => [''],
 		},
@@ -86,7 +111,7 @@ export default defineComponent({
 			default: false,
 		},
 		features: {
-			type: Object as () => { icon: string; text: string } | null,
+			type: Object as () => { icon: string; text: string }[] | null,
 			default: null,
 		},
 		price: {
@@ -99,9 +124,11 @@ export default defineComponent({
 		},
 	},
 	setup(props) {
+		console.log(props.images);
+
 		const statusCssMap = computed(() => ({
-			badge_success: props.status?.badge === 'latest',
-			badge_danger: props.status?.badge === 'hit',
+			success: props.status?.badge === 'latest',
+			danger: props.status?.badge === 'hit',
 		}));
 
 		function changeImageOnError(e: Event) {
@@ -144,13 +171,26 @@ export default defineComponent({
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		min-height: 230px;
+		height: 230px;
 		border-radius: 10px 10px 0 0;
-		background-color: $backgroundCard;
+		border-bottom: 1px solid $border;
+
+		.swiper {
+			height: 100%;
+		}
 	}
 
 	&__slide {
+		border-radius: 10px 10px 0 0;
 		text-align: center;
+		overflow: hidden;
+	}
+
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
 	}
 
 	&__status,

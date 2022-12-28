@@ -6,7 +6,8 @@
 		tag="button"
 		type="button"
 		:aria-label="type === 'next' ? 'Следующая картинка' : 'Предыдущая картинка'"
-		@click="changeSlide">
+		@click="changeSlide"
+	>
 		<ArrowLeftIcon v-if="type === 'prev'" :fill="null" />
 		<ArrowRightIcon v-else-if="type === 'next'" :fill="null" />
 	</AppChip>
@@ -54,7 +55,23 @@ export default defineComponent({
 <style lang="scss" scoped>
 @import '@/assets/css/modules/var';
 
-.swiperArrow svg {
-	fill: $primary;
+.swiperArrow {
+	&.disabled {
+		cursor: default;
+		opacity: .6;
+
+		&:hover {
+			background-color: #fff;
+		}
+	}
+
+	svg {
+		fill: $primary;
+		transition: fill .2s ease;
+	}
+
+	&:hover:not(.disabled) svg {
+		fill: #fff;
+	}
 }
 </style>
