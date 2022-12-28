@@ -10,7 +10,7 @@ class mainProducts {
 	}
 
 	public get(): Promise<AxiosResponse<ProductsResponseHeadI>> {
-		return this.api.get('products/');
+		return this.api.get('shop/products/');
 	}
 }
 

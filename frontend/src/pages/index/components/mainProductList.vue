@@ -3,10 +3,10 @@
 		<div class="mainProductList__head">
 			<h2 class="mainProductList__title title-h2">Электросамокаты</h2>
 			<div class="mainProductList__row">
-				<AppButton color="primary" mod="stroke">Хиты продаж</AppButton>
-				<AppButton color="tertiary" mod="fill">Для города</AppButton>
-				<AppButton color="tertiary" mod="fill">Для взрослых</AppButton>
-				<AppButton color="tertiary" mod="fill">Для детей</AppButton>
+				<AppButton class="mainProductList__button" color="primary" mod="stroke">Хиты продаж</AppButton>
+				<AppButton class="mainProductList__button" color="tertiary" mod="fill">Для города</AppButton>
+				<AppButton class="mainProductList__button" color="tertiary" mod="fill">Для взрослых</AppButton>
+				<AppButton class="mainProductList__button" color="tertiary" mod="fill">Для детей</AppButton>
 			</div>
 		</div>
 		<div class="productList">
@@ -54,9 +54,24 @@ export default defineComponent({
 	.mainProductList {
 		margin-top: 75px;
 
+		&__head {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 35px;
+		}
+
 		&__title {
 			margin: 0;
 			text-transform: uppercase;
+		}
+
+		&__row {
+			display: flex;
+		}
+
+		&__button + &__button {
+			margin-left: 10px;
 		}
 	}
 </style>

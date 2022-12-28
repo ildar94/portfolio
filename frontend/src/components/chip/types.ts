@@ -1,4 +1,4 @@
-const colorProp: string[] = ['primary', 'secondary', 'white'];
+const colorProp: string[] = ['primary', 'secondary', 'white', 'whiteDeep'];
 const circleProp: string[] = ['', 'small', 'medium', 'large'];
 const modProp: string[] = ['fill', 'stroke'];
 

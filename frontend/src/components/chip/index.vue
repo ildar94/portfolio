@@ -57,6 +57,7 @@ export default defineComponent({
 		padding: 10px;
 		border: 1px solid transparent;
 		border-radius: 2em;
+		background-color: transparent;
 		font-size: 14px;
 		line-height: 1;
 		color: #fff;
@@ -87,6 +88,12 @@ export default defineComponent({
 			background-color: $background;
 		}
 
+		&_whiteDeep_fill:not(&_hover),
+		&_hover.chip_whiteDeep_fill:hover,
+		&_hover.chip_whiteDeep_stroke:hover {
+			background-color: #fff;
+		}
+
 		&_hover.chip_primary_stroke:hover,
 		&_hover.chip_secondary_stroke:hover {
 			color: #fff;
@@ -102,6 +109,10 @@ export default defineComponent({
 
 		&_white_stroke {
 			border-color: $background;
+		}
+
+		&_whiteDeep_stroke {
+			border-color: #fff;
 		}
 
 		&_circle_small,
