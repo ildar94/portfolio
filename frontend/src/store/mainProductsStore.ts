@@ -20,10 +20,10 @@ export const useMainProductsStore = defineStore('mainProductsStore', {
 						item.priceFormat = new Intl.NumberFormat('ru', { style: 'currency', currency: 'RUB', maximumFractionDigits: 2 }).format(item.price);
 
 						if (item?.sales_price) {
-							item.salesPriceFormat = new Intl.NumberFormat('ru', { style: 'currency', currency: 'RUB' }).format(item?.sales_price);
+							item.salesPriceFormat = new Intl.NumberFormat('ru', { style: 'currency', currency: 'RUB' }).format(item.sales_price);
+						} else {
+							item.salesPriceFormat = null;
 						}
-
-						item.salesPriceFormat = null;
 					}
 
 					this.products = response.data.results;
