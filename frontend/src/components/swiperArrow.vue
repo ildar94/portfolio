@@ -1,7 +1,7 @@
 <template>
 	<AppChip
 		class="swiperArrow"
-		color="whiteDeep"
+		color="white"
 		circle="medium"
 		tag="button"
 		type="button"

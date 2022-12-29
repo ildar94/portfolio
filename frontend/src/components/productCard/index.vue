@@ -11,7 +11,7 @@
 				aria-label="Добавить в сравнение"
 				type="button"
 			>
-				<CompareIcon />
+				<CompareIcon fill="none" />
 			</AppChip>
 			<Swiper class="productCard__slider">
 				<SwiperSlide v-for="image in images" :key="image.images" class="productCard__slide">
@@ -20,8 +20,8 @@
 				<SwiperSlide v-if="!images || !images.length">
 					<img class="productCard__img" :src="require('@/assets/img/misc/product.png')" alt="">
 				</SwiperSlide>
-				<SwiperArrow class="productCard__arrow productCard__arrow_prev" type="prev" />
-				<SwiperArrow class="productCard__arrow productCard__arrow_next" type="next" />
+				<SwiperArrow v-if="images && images.length" class="productCard__arrow productCard__arrow_prev" type="prev" />
+				<SwiperArrow v-if="images && images.length" class="productCard__arrow productCard__arrow_next" type="next" />
 			</Swiper>
 		</div>
 		<div class="productCard__info">
@@ -34,7 +34,7 @@
 					:text="feature.text"
 					:icon="feature.icon" />
 			</div>
-			<div class="productCard__row">
+			<div class="productCard__row productCard__row_mt">
 				<div class="productCard__prices">
 					<div class="productCard__common">{{ sales_price }}</div>
 					<div class="productCard__price">{{ price }}</div>
@@ -43,30 +43,32 @@
 					<AppChip
 						class="productCard__chip"
 						:class="isInCart ? 'active' : ''"
+						mod="stroke"
 						tag="button"
 						color="white"
-						mod="stroke"
 						circle="medium"
 						type="button"
 						aria-label="Добавить в корзину"
 					>
-						<CartIcon />
+						<CartIcon fill="none" />
 					</AppChip>
 					<AppChip
 						class="productCard__chip"
 						:class="isInFavorites ? 'active' : ''"
+						mod="stroke"
 						tag="button"
 						color="white"
-						mod="stroke"
 						circle="medium"
 						type="button"
 						aria-label="Добавить в избранное"
 					>
-						<FavoritesIcon />
+						<FavoritesIcon fill="none" />
 					</AppChip>
 				</div>
 			</div>
-			<AppButton class="productCard__button">Купить в 1 клик</AppButton>
+			<div class="productCard__wrap">
+				<AppButton class="productCard__button">Купить в 1 клик</AppButton>
+			</div>
 		</div>
 	</div>
 </template>
@@ -115,17 +117,15 @@ export default defineComponent({
 			default: null,
 		},
 		price: {
-			type: Number,
+			type: String,
 			required: true,
 		},
 		sales_price: {
-			type: Number as () => number | null,
+			type: String as () => string | null,
 			default: null,
 		},
 	},
 	setup(props) {
-		console.log(props.images);
-
 		const statusCssMap = computed(() => ({
 			success: props.status?.badge === 'latest',
 			danger: props.status?.badge === 'hit',
@@ -163,6 +163,7 @@ export default defineComponent({
 .productCard {
 	display: flex;
 	flex-direction: column;
+	flex: 1 0 auto;
 	border-radius: 10px;
 	outline: 1px solid $border;
 
@@ -206,9 +207,20 @@ export default defineComponent({
 
 	&__compare {
 		right: 10px;
+
+		:deep(path) {
+			fill: $black;
+		}
+
+		&:hover :deep(path) {
+			fill: #fff;
+		}
 	}
 
 	&__info {
+		display: flex;
+		flex-direction: column;
+		flex: 1 0 auto;
 		padding: 20px 25px;
 	}
 
@@ -226,13 +238,16 @@ export default defineComponent({
 
 	&__features {
 		margin-top: 20px;
-		margin-bottom: 25px;
 	}
 
 	&__row {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		&_mt {
+			margin-top: 20px;
+		}
 	}
 
 	&__common {
@@ -247,8 +262,24 @@ export default defineComponent({
 		font-weight: 600;
 	}
 
+	&__chip :deep(path) {
+		fill: $black;
+	}
+
+	&__chip.active,
+	&__chip:hover :deep(path) {
+		fill: $primary;
+	}
+
 	&__chip + &__chip {
 		margin-left: 10px;
+	}
+
+	&__wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		flex: 1 0 auto;
 	}
 
 	&__button {

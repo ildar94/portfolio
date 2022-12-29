@@ -13,9 +13,9 @@
 			<div class="productList__item" v-for="item in mainProducts.products.slice(0, 8)" :key="item.id">
 				<ProductCard
 					:name="item.name"
-					:price="item.price"
+					:price="item.priceFormat"
 					:images="item.images"
-					:sales_price="item.sales_price"
+					:sales_price="item.salesPriceFormat"
 					:features="item?.features"
 					:is-in-cart="item?.is_in_cart"
 					:is-in-compare="item?.is_in_compare"

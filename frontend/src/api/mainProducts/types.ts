@@ -14,10 +14,12 @@ interface ProductI {
 	slug: string
 	article: number,
 	price: number,
+	priceFormat: string;
+	sales_price: number | null,
+	salesPriceFormat: string | null;
 	images: string[] | null,
 	features?: featureI[] | null;
 	description: string;
-	sales_price: number | null,
 	sold_time: number | null,
 	is_in_cart?: boolean;
 	is_in_favorites?: boolean;

@@ -14,6 +14,18 @@ export const useMainProductsStore = defineStore('mainProductsStore', {
 				const response = await mainProducts.get();
 
 				if (response.status === 200) {
+					for (let i = 0; i < response.data.results.length; i++) {
+						const item = response.data.results[i];
+
+						item.priceFormat = new Intl.NumberFormat('ru', { style: 'currency', currency: 'RUB', maximumFractionDigits: 2 }).format(item.price);
+
+						if (item?.sales_price) {
+							item.salesPriceFormat = new Intl.NumberFormat('ru', { style: 'currency', currency: 'RUB' }).format(item?.sales_price);
+						}
+
+						item.salesPriceFormat = null;
+					}
+
 					this.products = response.data.results;
 				}
 			} catch (e) {
