@@ -165,7 +165,7 @@ import CompareIcon from '@/components/icons/compareIcon.vue';
 import FavoritesIcon from '@/components/icons/favoritesIcon.vue';
 import CartIcon from '@/components/icons/cartIcon.vue';
 import CirclePlusIcon from '@/components/icons/circlePlusIcon.vue';
-import UserIcon from '@/components/icons/usericon.vue';
+import UserIcon from '@/components/icons/userIcon.vue';
 import SearchInput from '@/components/form/searchInput.vue';
 import AppButton from '@/components/button/index.vue';
 import AppMenu from '@/components/menu.vue';

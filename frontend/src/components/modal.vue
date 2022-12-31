@@ -31,7 +31,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import Chip from '@/components/chip/index.vue';
-import CrossIcon from '@/components/icons/crossicon.vue';
+import CrossIcon from '@/components/icons/crossIcon.vue';
 
 export default defineComponent({
 	name: 'appModal',
