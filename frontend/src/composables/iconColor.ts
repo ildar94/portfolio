@@ -1,3 +1,4 @@
+// todo Убрать
 function useIconColor(color: string): string {
 	return `icon_${color}`;
 }

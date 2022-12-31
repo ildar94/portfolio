@@ -7,6 +7,7 @@ import { defineComponent, computed, ComputedRef } from 'vue';
 import { colorProp, circleProp, modProp } from '@/components/chip/types';
 
 export default defineComponent({
+	// todo Добавить в EsLint исключение vue/multi-word-component-names и заменить возможные имена компонентов
 	name: 'AppChip',
 	props: {
 		tag: {

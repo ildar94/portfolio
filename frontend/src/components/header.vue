@@ -77,8 +77,20 @@
 			</div>
 			<SearchInput class="header__search" />
 			<div class="header__right">
+				<Chip
+					class="header__chip"
+					tag="button"
+					color="white"
+					circle="medium"
+					:colorOnHover="true"
+					type="button"
+					aria-label="Сравнения"
+					@click="isOpenUserModal = !isOpenUserModal"
+				>
+					<UserIcon />
+				</Chip>
 				<RouterLink v-slot="{ href, navigate }" custom :to="{ name: links?.compare.name }">
-					<AppChip
+					<Chip
 						class="header__chip"
 						tag="a"
 						color="white"
@@ -89,10 +101,10 @@
 						@click="navigate"
 					>
 						<CompareIcon />
-					</AppChip>
+					</Chip>
 				</RouterLink>
 				<RouterLink v-slot="{ href, navigate }" custom :to="{ name: links?.favorites.name }">
-					<AppChip
+					<Chip
 						class="header__chip"
 						tag="a"
 						color="white"
@@ -103,10 +115,10 @@
 						@click="navigate"
 					>
 						<FavoritesIcon />
-					</AppChip>
+					</Chip>
 				</RouterLink>
 				<RouterLink v-slot="{ href, navigate }" custom :to="{ name: links?.cart.name }">
-					<AppChip
+					<Chip
 						class="header__chip"
 						tag="a"
 						color="white"
@@ -116,7 +128,7 @@
 					>
 						<CartIcon />
 						<span class="header__text">{{ links.cart?.meta?.name || links?.cart?.name }}</span>
-					</AppChip>
+					</Chip>
 				</RouterLink>
 				<CartModal />
 			</div>
@@ -134,10 +146,11 @@
 				</router-link>
 				<router-link class="nav__link" :to="{ name: links?.specials.name }">
 					{{ links.specials?.meta?.name || links?.specials?.name }}
-					<AppChip class="nav__chip" tag="span" color="primary" circle="small">%</AppChip>
+					<Chip class="nav__chip" tag="span" color="primary" circle="small">%</Chip>
 				</router-link>
 			</nav>
 		</div>
+		<UserModal :showModal="isOpenUserModal" @close="isOpenUserModal = false" />
 	</header>
 </template>
 
@@ -152,11 +165,13 @@ import CompareIcon from '@/components/icons/compareIcon.vue';
 import FavoritesIcon from '@/components/icons/favoritesIcon.vue';
 import CartIcon from '@/components/icons/cartIcon.vue';
 import CirclePlusIcon from '@/components/icons/circlePlusIcon.vue';
+import UserIcon from '@/components/icons/usericon.vue';
 import SearchInput from '@/components/form/searchInput.vue';
 import AppButton from '@/components/button/index.vue';
 import AppMenu from '@/components/menu.vue';
-import AppChip from '@/components/chip/index.vue';
+import Chip from '@/components/chip/index.vue';
 import CartModal from '@/components/cartModal.vue';
+import UserModal from '@/components/user/userModal.vue';
 import { useClickOutside } from '@/composables/clickOutside';
 
 export default defineComponent({
@@ -188,6 +203,8 @@ export default defineComponent({
 		const outsideContactsButton: Ref<HTMLElement | null> = ref(null);
 		const outsideContactsModal: Ref<HTMLElement | null> = ref(null);
 
+		const isOpenUserModal: Ref<boolean> = ref(false);
+
 		onMounted(() => {
 			useClickOutside([outsideMenu?.value?.$el, outsideButtonMenu?.value?.$el], () => {
 				isMenuOpen.value = false;
@@ -201,6 +218,7 @@ export default defineComponent({
 		return {
 			links,
 			isMenuOpen,
+			isOpenUserModal,
 			outsideMenu,
 			outsideButtonMenu,
 			isOpenContacts,
@@ -216,11 +234,13 @@ export default defineComponent({
 		FavoritesIcon,
 		CartIcon,
 		CirclePlusIcon,
+		UserIcon,
 		SearchInput,
 		AppButton,
 		AppMenu,
-		AppChip,
+		Chip,
 		CartModal,
+		UserModal,
 	},
 });
 </script>
