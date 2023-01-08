@@ -4,21 +4,13 @@
 		:type="type"
 		:placeholder="placeholder"
 		:name="name"
-		:value="valueView"
-		v-maska="maskConvert"
-		@input="onInput"
-	/>
+		:value="modelValue"
+		@input="$emit('update:modelValue', $event.target.value)"
+	>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import type { ComputedRef } from 'vue';
-import { maska } from 'maska';
-
-interface modelValueEmit {
-	value: string;
-	rawValue: string;
-}
+import { defineComponent } from 'vue';
 
 export default defineComponent({
 	name: 'AppInput',
@@ -37,49 +29,9 @@ export default defineComponent({
 			default: '',
 		},
 		modelValue: {
-			type: [Object as () => modelValueEmit, String],
-			default: '',
-		},
-		mask: {
 			type: String,
 			default: '',
 		},
-	},
-	setup(props, { emit }) {
-		function onInput(event: Event) {
-			const target: HTMLInputElement = event.target as HTMLInputElement;
-
-			if (props.mask) {
-				const modelValue: modelValueEmit = {
-					value: target.value,
-					rawValue: `${target.dataset.maskRawValue}`,
-				};
-
-				emit('update:modelValue', modelValue);
-			} else {
-				emit('update:modelValue', target.value);
-			}
-		}
-
-		const maskConvert: ComputedRef<string> = computed(() => props.mask ? props.mask : '');
-		const valueView: ComputedRef<string | modelValueEmit> = computed(() => {
-			if (props.mask) {
-				const modelValue: modelValueEmit = props.modelValue as modelValueEmit;
-
-				return modelValue.value;
-			}
-
-			return props.modelValue;
-		});
-
-		return {
-			onInput,
-			maskConvert,
-			valueView,
-		};
-	},
-	directives: {
-		maska,
 	},
 });
 </script>

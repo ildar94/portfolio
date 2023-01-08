@@ -19,9 +19,9 @@
 				</div>
 				<div class="modal__content">
 					<slot></slot>
-				</div>
-				<div class="modal__footer">
-					<slot name="footer"></slot>
+					<div v-if="$slots.footer" class="modal__footer">
+						<slot name="footer"></slot>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -98,8 +98,7 @@ export default defineComponent({
 	}
 
 	&__header,
-	&__content,
-	&__footer {
+	&__content {
 		padding-left: 40px;
 		padding-right: 40px;
 	}
@@ -114,7 +113,6 @@ export default defineComponent({
 	}
 
 	&__footer {
-		display: flex;
 		padding-top: 15px;
 	}
 
