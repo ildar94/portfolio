@@ -39,6 +39,7 @@ from rest_framework_simplejwt.views import TokenVerifyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
     path('api/v1/shop/', include('shop.urls')),
     path('api/v1/cart/', include('cart.urls')),
     path('api/v1/promo/', include('promo.urls')),

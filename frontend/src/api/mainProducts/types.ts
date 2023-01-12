@@ -21,9 +21,6 @@ interface ProductI {
 	features?: featureI[] | null;
 	description: string;
 	sold_time: number | null,
-	is_in_cart?: boolean;
-	is_in_favorites?: boolean;
-	is_in_compare?: boolean;
 	attr: attrI,
 }
 

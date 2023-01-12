@@ -28,7 +28,7 @@
 					</div>
 				</div>
 				<div class="header__contacts">
-					<a class="header__phone" href="tel:+79529561997">+7 (952) 956-19-97</a>
+					<a class="header__phone" href="tel:+8881112233">+7 (888) 111-22-33</a>
 					<button
 						class="header__contactsTrigger"
 						:class="isOpenContacts ? 'active' : ''"
@@ -44,16 +44,16 @@
 							<ul class="contactsModal__list">
 								<li class="contactsModal__item">
 									<div class="contactsModal__name">Сервисный центр</div>
-									<a class="contactsModal__link" href="tel:+79529561997">+7 (952) 956-19-97</a>
+									<a class="contactsModal__link" href="tel:+8881112233">+7 (888) 111-22-33</a>
 								</li>
 								<li class="contactsModal__item">
 									<div class="contactsModal__name">Оптовый отдел</div>
-									<a class="contactsModal__link" href="tel:+79529561997">+7 (952) 956-19-97</a>
+									<a class="contactsModal__link" href="tel:+8881112233">+7 (888) 111-22-33</a>
 									<span class="contactsModal__time">пн-сб 10:00 - 19:00</span>
 								</li>
 								<li class="contactsModal__item">
 									<div class="contactsModal__name">Отдел рекламаций и претензий</div>
-									<a class="contactsModal__link" href="tel:+79529561997">+7 (952) 956-19-97</a>
+									<a class="contactsModal__link" href="tel:+8881112233">+7 (888) 111-22-33</a>
 									<span class="contactsModal__time">ср-вс с 10:00 до 19:00</span>
 								</li>
 							</ul>
@@ -122,15 +122,17 @@
 						class="header__chip"
 						tag="a"
 						color="white"
-						:colorOnHover="true"
 						:href="href"
+						:colorOnHover="true"
+						@mouseenter="openCartModal"
+						@mouseleave="hideCartModal"
 						@click="navigate"
 					>
 						<CartIcon />
-						<span class="header__text">{{ links.cart?.meta?.name || links?.cart?.name }}</span>
+						<span class="header__text">	{{ links.cart?.meta?.name || links?.cart?.name }}</span>
 					</Chip>
 				</RouterLink>
-				<CartModal />
+				<CartModal ref="cartModal" />
 			</div>
 		</div>
 		<div class="header__bottom">
@@ -173,6 +175,7 @@ import Chip from '@/components/chip/index.vue';
 import CartModal from '@/components/cartModal.vue';
 import UserModal from '@/components/user/userModal.vue';
 import { useClickOutside } from '@/composables/clickOutside';
+import { useCartStore } from '@/store/cartStore';
 
 export default defineComponent({
 	name: 'AppHeader',
@@ -215,6 +218,23 @@ export default defineComponent({
 			});
 		});
 
+		const cartStore = useCartStore();
+		const cartModal: Ref<ComponentPublicInstance | null> = ref(null);
+
+		function openCartModal() {
+			if (cartStore.cnt > 0) {
+				cartStore.$patch({ modalOpen: true });
+			}
+		}
+
+		function hideCartModal(e: MouseEvent) {
+			const $element: HTMLElement = e.relatedTarget as HTMLElement;
+
+			if (cartModal.value !== null && !$element.isEqualNode(cartModal.value?.$el)) {
+				cartStore.$patch({ modalOpen: false });
+			}
+		}
+
 		return {
 			links,
 			isMenuOpen,
@@ -224,6 +244,10 @@ export default defineComponent({
 			isOpenContacts,
 			outsideContactsButton,
 			outsideContactsModal,
+			cartStore,
+			openCartModal,
+			hideCartModal,
+			cartModal,
 		};
 	},
 	components: {

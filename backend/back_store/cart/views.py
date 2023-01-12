@@ -76,9 +76,10 @@ class CartViewSet(ListModelMixin,
 
 
 class CartItemViewSet(ModelViewSet):
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    #http_method_names = ['get', 'post', 'patch', 'delete']
 
     def get_serializer_class(self):
+        print(self.request.method)
         if self.request.method == 'POST':
             return AddCartItemSerializer
         elif self.request.method == 'PATCH':

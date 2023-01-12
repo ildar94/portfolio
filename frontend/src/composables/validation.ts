@@ -6,8 +6,8 @@ interface schemeItemI {
 	params?: any[];
 }
 
-interface schemeI {
-	[key: string]: schemeItemI[];
+type schemeI<T> = {
+	[K in keyof T]: schemeItemI[];
 }
 
 interface validResultI {
@@ -15,11 +15,11 @@ interface validResultI {
 	error: string;
 }
 
-function useValidation(
+function useValidation<T>(
 	data: { [key: string]: any },
-	scheme: ComputedRef<schemeI>,
-): { [key: string]: validResultI } {
-	const result: { [key: string]: validResultI } = {};
+	scheme: ComputedRef<schemeI<T>>,
+): { [K in keyof T]: validResultI } {
+	const result: { [K in keyof T]: validResultI } = {} as { [K in keyof T]: validResultI };
 
 	watchEffect(() => {
 		const fields = { ...data };
@@ -50,6 +50,8 @@ function useValidation(
 				}
 
 				result[key] = valid;
+			} else {
+				result[key] = { isValid: true, error: '' };
 			}
 		}
 	});
