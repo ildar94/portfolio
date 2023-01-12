@@ -1,4 +1,5 @@
 interface CartItemProductI {
+	id: number;
 	name: string;
 	description: string;
 	price: number;
@@ -7,7 +8,6 @@ interface CartItemProductI {
 
 interface CartItemI {
 	id: number;
-	product_id: number;
 	product: CartItemProductI;
 	quantity: number;
 	total_price: number;
