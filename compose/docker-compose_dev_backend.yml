@@ -9,7 +9,6 @@ services:
     restart: always
     command: bash entrypoint.sh
     volumes:
-      - static:/usr/src/app/static
       - media:/usr/src/app/media
       - type: bind
         source: ../backend/back_store
@@ -45,7 +44,6 @@ services:
       - redisdata:/data
 
 volumes:
-  static:
   media:
   redisdata:
   pgdata_dev:

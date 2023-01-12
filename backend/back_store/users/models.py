@@ -11,7 +11,7 @@ class User(AbstractUser):
     building = models.CharField(max_length=255, blank=True, null=True)
     apartment  =models.PositiveIntegerField(blank=True, null=True)
     index = models.PositiveIntegerField(blank=True, null=True)
-    phone_number = PhoneNumberField(blank=True, null=True)
+    phone_number = PhoneNumberField()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     class Meta:
