@@ -5,8 +5,9 @@ from django.contrib.postgres.fields import JSONField
 import os
 from django.conf import settings
 # Create your models here.
-
+from django.contrib.postgres.fields import ArrayField
 #################################JSONField-technology###################################
+
 
 
 def product_directory_path(instance, filename):
@@ -56,6 +57,19 @@ class SubCategoryItem(models.Model):
 
     def __str__(self):
         return self.item
+
+class FiltersByCategory(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='filter',to_field='slug', blank=True)
+    name = models.CharField(max_length=255, blank=True)
+    alias = models.SlugField(max_length=255, unique=True, blank=True)
+    options =ArrayField(models.CharField(max_length=200), blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.alias:
+            self.alias = slugify(self.name)
+        super(FiltersByCategory, self).save(*args, **kwargs)
+
+
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
