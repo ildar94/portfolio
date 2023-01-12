@@ -79,11 +79,13 @@ export default defineComponent({
 		background-color: transparent;
 		font-weight: 500;
 		transition: background-color .2s ease, color .2s ease;
+		outline: none;
 
 		&_icon {
 			display: inline-flex;
 			justify-content: center;
 			align-items: center;
+			line-height: 1;
 		}
 
 		&_primary_fill {
@@ -91,7 +93,8 @@ export default defineComponent({
 			border-color: $primary;
 			color: #fff;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $primary-800;
 			}
 		}
@@ -100,7 +103,8 @@ export default defineComponent({
 			border-color: $primary;
 			color: $primary;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $primary;
 				color: #fff;
 			}
@@ -111,7 +115,8 @@ export default defineComponent({
 			border-color: $secondary;
 			color: #fff;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $secondary-900;
 			}
 		}
@@ -120,7 +125,8 @@ export default defineComponent({
 			border-color: $secondary;
 			color: $secondary;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $secondary;
 				color: #fff;
 			}
@@ -131,7 +137,8 @@ export default defineComponent({
 			border-color: $background;
 			color: $surface;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: transparent;
 				border-color: $primary;
 				color: $primary;
@@ -142,7 +149,8 @@ export default defineComponent({
 			border-color: $background;
 			color: $surface;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $primary;
 				border-color: $primary;
 				color: #fff;
@@ -154,7 +162,8 @@ export default defineComponent({
 			border-color: $success;
 			color: #fff;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $success-800;
 				color: #fff;
 			}
@@ -164,7 +173,8 @@ export default defineComponent({
 			border-color: $success;
 			color: $success;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $success-800;
 				color: #fff;
 			}
@@ -175,7 +185,8 @@ export default defineComponent({
 			border-color: #fff;
 			color: $primary;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: $background;
 			}
 		}
@@ -184,7 +195,8 @@ export default defineComponent({
 			border-color: #fff;
 			color: #fff;
 
-			&:hover {
+			&:hover,
+			&:focus-visible {
 				background-color: #fff;
 				color: $primary;
 			}

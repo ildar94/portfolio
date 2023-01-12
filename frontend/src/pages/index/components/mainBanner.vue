@@ -15,7 +15,7 @@
 					<div class="mainBanner__info">
 						<h2 class="mainBanner__title">{{ slide.title }}</h2>
 						<div class="mainBanner__desc">{{ slide.desc }}</div>
-						<RouterLink to="/catalog/" v-slot="{ href, navigate }">
+						<RouterLink :to="`/catalog/${slide.category}`" v-slot="{ href, navigate }">
 							<AppButton class="mainBanner__link" color="white" size="large" tag="a" :href="href" @click="navigate">Перейти в католог</AppButton>
 						</RouterLink>
 					</div>
@@ -24,7 +24,7 @@
 					<img class="mainBanner__img" :src="slide.image" alt="" @error="changeImageOnError">
 				</div>
 			</SwiperSlide>
-			<SwiperControl :progress="progress" class="mainBanner__controls container" />
+			<SwiperControl v-if="promoStore.mainBanner.length > 1" :progress="progress" class="mainBanner__controls container" />
 		</Swiper>
 	</div>
 </template>

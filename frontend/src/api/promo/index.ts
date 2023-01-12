@@ -8,9 +8,8 @@ class Promo {
 		this.api = api;
 	}
 
-	// todo В дальнейшем нужно сделать get под каждую сущность внутри промо, чтобы не тянуть все сразу
-	public get(): Promise<AxiosResponse> {
-		return this.api.get('promo');
+	public getMainBanner(): Promise<AxiosResponse> {
+		return this.api.get('promo/mainbanner/');
 	}
 }
 

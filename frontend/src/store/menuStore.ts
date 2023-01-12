@@ -5,16 +5,16 @@ import { AxiosResponse } from 'axios';
 const menuApi: Menu = new Menu();
 
 interface subMenuItemInterface {
-	id: string;
-	title: string;
-	items: { id: string; text: string; }[];
+	type: string;
+	item: { item: string; }[];
 }
 
 interface menuItemInterface {
 	id: string;
 	icon: string;
-	text: string;
-	subList: subMenuItemInterface[];
+	name: string;
+	slug: string;
+	submenu: subMenuItemInterface[];
 }
 
 export const useMenuStore = defineStore('menuStore', {

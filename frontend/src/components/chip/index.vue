@@ -7,6 +7,7 @@ import { defineComponent, computed, ComputedRef } from 'vue';
 import { colorProp, circleProp, modProp } from '@/components/chip/types';
 
 export default defineComponent({
+	// todo Добавить в EsLint исключение vue/multi-word-component-names и заменить возможные имена компонентов
 	name: 'AppChip',
 	props: {
 		tag: {
@@ -57,6 +58,7 @@ export default defineComponent({
 		padding: 10px;
 		border: 1px solid transparent;
 		border-radius: 2em;
+		background-color: transparent;
 		font-size: 14px;
 		line-height: 1;
 		color: #fff;
@@ -87,6 +89,21 @@ export default defineComponent({
 			background-color: $background;
 		}
 
+		&_whiteDeep_fill:not(&_hover),
+		&_hover.chip_whiteDeep_fill:hover,
+		&_hover.chip_whiteDeep_stroke:hover {
+			background-color: #fff;
+		}
+
+		&_white_fill:not(&_hover):hover,
+		&_whiteDeep_fill:not(&_hover):hover {
+			background-color: $primary;
+		}
+
+		&_white_stroke:hover {
+			background-color: $background;
+		}
+
 		&_hover.chip_primary_stroke:hover,
 		&_hover.chip_secondary_stroke:hover {
 			color: #fff;
@@ -104,22 +121,30 @@ export default defineComponent({
 			border-color: $background;
 		}
 
+		&_whiteDeep_stroke {
+			border-color: #fff;
+		}
+
+		&_circle_small,
+		&_circle_medium,
+		&_circle_large {
+			border-radius: 50%;
+			padding: 0;
+		}
+
 		&_circle_small {
 			width: 30px;
 			height: 30px;
-			border-radius: 50%;
 		}
 
 		&_circle_medium {
 			width: 40px;
 			height: 40px;
-			border-radius: 50%;
 		}
 
 		&_circle_large {
 			width: 50px;
 			height: 50px;
-			border-radius: 50%;
 		}
 	}
 </style>

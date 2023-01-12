@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import index from '@/pages/index/index.vue';
 import service from '@/pages/service.vue';
-import catalog from '@/pages/catalog.vue';
+import catalog from '@/pages/catalog/index.vue';
+import subCatalog from '@/pages/catalog/catalog.vue';
 import about from '@/pages/about.vue';
 import news from '@/pages/news.vue';
 import specials from '@/pages/specials.vue';
@@ -28,12 +29,17 @@ const routes: Array<RouteRecordRaw> = [
 		},
 	},
 	{
-		path: '/catalog',
+		path: '/catalog/',
 		name: 'catalog',
 		component: catalog,
 		meta: {
 			name: 'Каталог',
 		},
+	},
+	{
+		path: '/catalog/:slug',
+		name: 'subCatalog',
+		component: subCatalog,
 	},
 	{
 		path: '/about',

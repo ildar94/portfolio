@@ -1,0 +1,30 @@
+.alert {
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: #fff;
+
+  &_small {
+    padding: 3px 6px;
+    border-radius: 2px;
+  }
+
+  &_large {
+    padding: 12px 24px;
+  }
+
+  &_primary {
+    background-color: $primary;
+  }
+
+  &_secondary {
+    background-color: $secondary;
+  }
+
+  &_success {
+    background-color: $success;
+  }
+
+  &_danger {
+    background-color: $danger;
+  }
+}
