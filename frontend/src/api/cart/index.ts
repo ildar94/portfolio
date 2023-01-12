@@ -1,7 +1,6 @@
 import { api } from '@/api';
 import { AxiosResponse, AxiosInstance } from 'axios';
-
-// Cart
+import { CartResponseI, CartAddResponseI } from '@/api/cart/types';
 
 class Cart {
 	private api: AxiosInstance;
@@ -10,16 +9,24 @@ class Cart {
 		this.api = api;
 	}
 
-	public get(): Promise<AxiosResponse> {
-		return this.api.get('cart');
+	public getId(): Promise<AxiosResponse<CartResponseI[]>> {
+		return this.api.get('cart/carts/');
 	}
 
-	public add(id: string, cnt: number): Promise<AxiosResponse> {
-		return this.api.post('cart', { id, cnt });
+	public get(id: string): Promise<AxiosResponse<CartResponseI>> {
+		return this.api.get(`cart/carts/${id}/`);
 	}
 
-	public remove(id: string): Promise<AxiosResponse> {
-		return this.api.delete(`cart/${id}`);
+	public add(cartId: string, id: number, cnt: number): Promise<AxiosResponse<CartAddResponseI>> {
+		return this.api.post(`cart/carts/${cartId}/items/`, { product_id: id, quantity: cnt });
+	}
+
+	public remove(cartId: string, id: number): Promise<AxiosResponse> {
+		return this.api.delete(`cart/carts/${cartId}/items/${id}/`);
+	}
+
+	public edit(cartId: string, id: number, cnt: number): Promise<AxiosResponse> {
+		return this.api.patch(`cart/carts/${cartId}/items/${id}/`, { quantity: cnt });
 	}
 }
 

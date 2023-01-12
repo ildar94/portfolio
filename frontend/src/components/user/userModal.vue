@@ -6,7 +6,7 @@
 					<div class="form__row">
 						<label class="form__field form__field_alert">
 							<AppInput v-model="userData.name" type="text" placeholder="Введите Имя *" />
-							<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.name.isValid ? 'active' : ''">
+							<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.name.isValid }">
 								{{ validation.name.error }}
 							</span>
 						</label>
@@ -17,13 +17,13 @@
 					<div class="form__row">
 						<label class="form__field form__field_alert">
 							<AppInput v-model="userData.email" placeholder="Введите эл. почту *" inputmode="email" autocomplete="username" />
-							<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.email.isValid ? 'active' : ''">
+							<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.email.isValid }">
 								{{ validation.email.error }}
 							</span>
 						</label>
 						<label class="form__field form__field_alert">
 							<AppInput v-model="userData.phone" inputmode="numeric" placeholder="Введите телефон *" v-maska="phoneObject" data-maska="+7 (###)-###-##-##" />
-							<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.phone.isValid ? 'active' : ''">
+							<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.phone.isValid }">
 								{{ validation.phone.error }}
 							</span>
 						</label>
@@ -47,13 +47,13 @@
 					<div class="form__row">
 						<label class="form__field form__field_alert">
 							<AppInput v-model="userData.password" type="password" placeholder="Введите пароль *" autocomplete="new-password" />
-							<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.password.isValid ? 'active' : ''">
+							<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.password.isValid }">
 								{{ validation.password.error }}
 							</span>
 						</label>
 						<label class="form__field form__field_alert">
 							<AppInput v-model="userData.passwordRetry" type="password" placeholder="Повторите пароль *" autocomplete="new-password" />
-							<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.passwordRetry.isValid ? 'active' : ''">
+							<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.passwordRetry.isValid }">
 								{{ validation.passwordRetry.error }}
 							</span>
 						</label>
@@ -71,13 +71,13 @@
 				<template v-else>
 					<label class="form__field form__field_alert">
 						<AppInput v-model="userData.email" inputmode="email" placeholder="Введите эл. почту *" autocomplete="username" />
-						<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.email.isValid ? 'active' : ''">
+						<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.email.isValid }">
 							{{ validation.email.error }}
 						</span>
 					</label>
 					<label class="form__field form__field_alert">
 						<AppInput v-model="userData.password" type="password" placeholder="Введите пароль *" autocomplete="current-password" />
-						<span class="form__error alert alert_small alert_danger" :class="isValidationActive && !validation.password.isValid ? 'active' : ''">
+						<span class="form__error alert alert_small alert_danger" :class="{ active: isValidationActive && !validation.password.isValid }">
 							{{ validation.password.error }}
 						</span>
 					</label>
@@ -98,7 +98,7 @@ import AppInput from '@/components/form/input.vue';
 import AppButton from '@/components/button/index.vue';
 import ArrowLeftIcon from '@/components/icons/arrowLeftIcon.vue';
 import { minLength, isEqual, isValidEmail, required } from '@/utils/validation';
-import { useValidation, schemeI } from '@/composables/validation';
+import { useValidation } from '@/composables/validation';
 import { UserAuthI } from '@/api/user/types';
 import { vMaska, MaskaDetail } from 'maska';
 
@@ -116,7 +116,7 @@ export default defineComponent({
 	},
 	setup() {
 		const isAuth = ref(false);
-		const isSignUp = ref(true);
+		const isSignUp = ref(false);
 		const title = computed(() => isSignUp.value ? 'Регистрация' : 'Вход в личный кабинет');
 
 		function changeTemplate(signUp: boolean) {
@@ -149,7 +149,7 @@ export default defineComponent({
 			apartment: '',
 		});
 
-		const validationScheme: ComputedRef<schemeI> = computed(() => ({
+		const validationScheme = computed(() => ({
 			name: [{ fn: required, errorMessage: 'Имя обязательно для заполнения' }],
 			email: [
 				{ fn: required, errorMessage: 'Эл. почта обязательна для заполнения' },
