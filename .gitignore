@@ -27,3 +27,4 @@ backend/venv/
 
 backend/env/
 /backend/pgsql/
+backend/back_store/.env*

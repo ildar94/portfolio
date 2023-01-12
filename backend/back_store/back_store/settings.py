@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cart',
     'users',
     'promo',
+    'blog',
     'rest_framework',
     'django_filters',
     "debug_toolbar",
@@ -90,19 +91,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'back_store.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'store',
-#         'USER': 'dev',
-#         'PASSWORD': 'Gilyazev123',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
 
 DATABASES = {
     'default': {

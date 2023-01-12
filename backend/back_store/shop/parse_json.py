@@ -94,49 +94,49 @@ def build_characteristics(product):
     return characteristics_dict
 
 
-
-to_json = []
-ready_dict ={}
-index = 234678
-for product in all_products:
-    name = product['title'].split("(")[0]  # в БД -charfield
-    price = product['price']  # to DB - float
-    complectation = komplectation_func(product)  # to DB JSONField
-    colors = color_is_exist(product)  # to DB JSONField
-    brand = exist_in('brand', product)  # в БД -charfield
-    prod_option_results = prod_option_check(product)  # calulating
-    prod_option = prod_option_results[0]  # в БД -charfield
-    prod_variants = prod_option_results[1]  # в БД -charfield
-    prod_option2 = prod_option_results[2]  # в БД -charfield
-    prod_variants2 = prod_option_results[3]  # в БД -charfield
-    prod_option3 = prod_option_results[4]  # в БД -charfield
-    prod_variants3 = prod_option_results[5]  # в БД -charfield
-    editions = buld_editions(product)  # to DB JSONField
-    attributes = build_characteristics(product)  # to DB JSONField
-    index +=1
-    a = Product(name = name,
-                article = index,
-                price = price,
-                description = None,
-                sales_price = None,
-                sold_time = None,
-                category_id = Category(name='Электросамокаты'),
-                attrs = attributes)
-    a.save()
-    b = ProductAdditionals(
-        product=Product(name=name),
-        complectation = complectation,
-        colors = colors,
-        brand = brand,
-        prod_option = prod_option,
-        prod_variants = prod_variants,
-        prod_option2 = prod_option2,
-        prod_variants2 =prod_variants2,
-        prod_option3 = prod_option3,
-        prod_variants3 = prod_variants3,
-        editions = editions
-    )
-    b.save()
+#
+# to_json = []
+# ready_dict ={}
+# index = 234678
+# for product in all_products:
+#     name = product['title'].split("(")[0]  # в БД -charfield
+#     price = product['price']  # to DB - float
+#     complectation = komplectation_func(product)  # to DB JSONField
+#     colors = color_is_exist(product)  # to DB JSONField
+#     brand = exist_in('brand', product)  # в БД -charfield
+#     prod_option_results = prod_option_check(product)  # calulating
+#     prod_option = prod_option_results[0]  # в БД -charfield
+#     prod_variants = prod_option_results[1]  # в БД -charfield
+#     prod_option2 = prod_option_results[2]  # в БД -charfield
+#     prod_variants2 = prod_option_results[3]  # в БД -charfield
+#     prod_option3 = prod_option_results[4]  # в БД -charfield
+#     prod_variants3 = prod_option_results[5]  # в БД -charfield
+#     editions = buld_editions(product)  # to DB JSONField
+#     attributes = build_characteristics(product)  # to DB JSONField
+#     index +=1
+#     a = Product(name = name,
+#                 article = index,
+#                 price = price,
+#                 description = None,
+#                 sales_price = None,
+#                 sold_time = None,
+#                 category_id = Category(name='Электросамокаты'),
+#                 attrs = attributes)
+#     a.save()
+#     b = ProductAdditionals(
+#         product=Product(name=name),
+#         complectation = complectation,
+#         colors = colors,
+#         brand = brand,
+#         prod_option = prod_option,
+#         prod_variants = prod_variants,
+#         prod_option2 = prod_option2,
+#         prod_variants2 =prod_variants2,
+#         prod_option3 = prod_option3,
+#         prod_variants3 = prod_variants3,
+#         editions = editions
+#     )
+#     b.save()
 
 
 
