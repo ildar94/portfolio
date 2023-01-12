@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import Cart from '@/api/cart';
 import { AxiosResponse } from 'axios';
-import { CartItemI } from '@/api/cart/types';
+import { CartItemI, CartResponseI } from '@/api/cart/types';
 import { priceFormat } from '@/utils/format';
 
 const cartApi: Cart = new Cart();
@@ -17,45 +17,56 @@ export const useCartStore = defineStore('cartStore', {
 	}),
 	getters: {
 		isInCart: (state) => (id: number) => {
-			return !!state.products.find(item => item.product_id === id);
+			return !!state.products.find(item => item.product.id === id);
 		},
 	},
 	actions: {
-		async getCartId(): Promise<void> {
+		async getCartId(): Promise<CartResponseI | null> {
 			const response = await cartApi.getId();
 
 			if (response.status === 200) {
 				this.cartId = response.data[0].id;
+
+				return response.data[0];
 			}
+
+			return null;
 		},
 		async getProducts(): Promise<void> {
+			let cart: CartResponseI | null = null;
+
 			if (this.cartId === '') {
-				await this.getCartId();
+				cart = await this.getCartId();
 			}
 
-			const response = await cartApi.get(this.cartId);
+			if (cart) {
+				let data: CartResponseI;
 
-			if (response.status === 200) {
-				for (let i = 0; i < response.data.items.length; i++) {
-					const item = response.data.items[i];
+				if (cart.items.length) {
+					data = cart;
+				} else {
+					const response = await cartApi.get(this.cartId);
 
-					if (!item.totalPriceFormat) {
-						item.totalPriceFormat = priceFormat(item.total_price);
+					if (response.status === 200) {
+						data = response.data;
 					}
 
-					if (!item.product.formatPrice) {
-						item.product.formatPrice = priceFormat(item.product.price);
-					}
-
-					if (!response.data.totalPriceFormat) {
-						response.data.totalPriceFormat = priceFormat(response.data.total_price);
-					}
+					throw response.status;
 				}
 
-				this.products = response.data.items;
-				this.cnt = response.data.items.length;
-				this.total = response.data.total_price;
-				this.totalFormat = response.data.totalPriceFormat;
+				data.items = data.items.map(item => {
+					if (!item.totalPriceFormat) item.totalPriceFormat = priceFormat(item.total_price);
+					if (!item.product.formatPrice) item.product.formatPrice = priceFormat(item.product.price);
+
+					return item;
+				});
+
+				if (!data.totalPriceFormat) data.totalPriceFormat = priceFormat(data.total_price);
+
+				this.products = data.items;
+				this.cnt = data.items.length;
+				this.total = data.total_price;
+				this.totalFormat = data.totalPriceFormat;
 			}
 		},
 		async addToCart(id: number): Promise<void> {
@@ -85,11 +96,6 @@ export const useCartStore = defineStore('cartStore', {
 					this.modalOpen = false;
 				}
 			}
-		},
-		async editCnt(id: number, cnt: number): Promise<void> {
-			const response: AxiosResponse = await cartApi.edit(this.cartId, id, cnt);
-
-			console.log(response);
 		},
 	},
 });
