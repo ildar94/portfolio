@@ -12,14 +12,15 @@
 		<div class="productList">
 			<div class="productList__item" v-for="item in mainProducts.products.slice(0, 8)" :key="item.id">
 				<ProductCard
+					:id="item.id"
 					:name="item.name"
 					:price="item.priceFormat"
 					:images="item.images"
 					:sales_price="item.salesPriceFormat"
 					:features="item?.features"
-					:is-in-cart="item?.is_in_cart"
-					:is-in-compare="item?.is_in_compare"
-					:is-in-favorites="item?.is_in_favorites"
+					:is-in-cart="cartStore.isInCart(item.id)"
+					:is-in-compare="false"
+					:is-in-favorites="false"
 				/>
 			</div>
 		</div>
@@ -30,7 +31,8 @@
 import { defineComponent } from 'vue';
 import AppButton from '@/components/button/index.vue';
 import { useMainProductsStore } from '@/store/mainProductsStore';
-import ProductCard from '@/components/productCard/index.vue';
+import { useCartStore } from '@/store/cartStore';
+import ProductCard from '@/components/productCard.vue';
 
 export default defineComponent({
 	name: 'MainProductList',
@@ -39,8 +41,11 @@ export default defineComponent({
 
 		mainProducts.get();
 
+		const cartStore = useCartStore();
+
 		return {
 			mainProducts,
+			cartStore,
 		};
 	},
 	components: {

@@ -49,6 +49,7 @@
 						circle="medium"
 						type="button"
 						aria-label="Добавить в корзину"
+						@click="addToCart"
 					>
 						<CartIcon fill="none" />
 					</AppChip>
@@ -66,6 +67,7 @@
 					</AppChip>
 				</div>
 			</div>
+			{{ isInCart }}
 			<div class="productCard__wrap">
 				<AppButton class="productCard__button">Купить в 1 клик</AppButton>
 			</div>
@@ -75,6 +77,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import { useCartStore } from '@/store/cartStore';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import SwiperArrow from '@/components/swiperArrow.vue';
 import AppChip from '@/components/chip/index.vue';
@@ -83,11 +86,15 @@ import AppFeature from '@/components/feature.vue';
 import CompareIcon from '@/components/icons/compareIcon.vue';
 import CartIcon from '@/components/icons/cartIcon.vue';
 import FavoritesIcon from '@/components/icons/favoritesIcon.vue';
-import { statusBadge } from '@/components/productCard/types';
+type statusBadge = 'hit' | 'latest';
 
 export default defineComponent({
 	name: 'ProductCard',
 	props: {
+		id: {
+			type: Number,
+			required: true,
+		},
 		name: {
 			type: String,
 			required: true,
@@ -136,9 +143,16 @@ export default defineComponent({
 			target.src = require('@/assets/img/misc/product_2.png');
 		}
 
+		const cartStore = useCartStore();
+
+		function addToCart() {
+			cartStore.addToCart(props.id);
+		}
+
 		return {
 			changeImageOnError,
 			statusCssMap,
+			addToCart,
 		};
 	},
 	components: {
