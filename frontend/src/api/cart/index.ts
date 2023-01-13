@@ -1,16 +1,27 @@
-import { api } from '@/api';
+import { api, errorConfigI } from '@/api';
 import { AxiosResponse, AxiosInstance } from 'axios';
 import { CartResponseI, CartAddResponseI } from '@/api/cart/types';
 
 class Cart {
 	private api: AxiosInstance;
+	private errorConfig: errorConfigI = {
+		title: 'Ошибка корзины',
+		text: '',
+	};
 
 	constructor() {
 		this.api = api;
 	}
 
 	public getId(): Promise<AxiosResponse<CartResponseI[]>> {
-		return this.api.get('cart/carts/');
+		this.errorConfig.text = 'При загрузке идендификатора корзины';
+		this.errorConfig.critical = true;
+
+		return this.api.get('cart/carts/', {
+			params: {
+				errorConfig: this.errorConfig,
+			},
+		});
 	}
 
 	public get(id: string): Promise<AxiosResponse<CartResponseI>> {

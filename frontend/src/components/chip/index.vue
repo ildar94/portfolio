@@ -73,39 +73,52 @@ export default defineComponent({
 
 		&_primary_fill:not(&_hover),
 		&_hover.chip_primary_fill:hover,
-		&_hover.chip_primary_stroke:hover, {
+		&_hover.chip_primary_stroke:hover,
+		&_hover.chip_primary_fill.active,
+		&_hover.chip_primary_stroke.active {
 			background-color: $primary;
 		}
 
 		&_secondary_fill:not(&_hover),
 		&_hover.chip_secondary_fill:hover,
-		&_hover.chip_secondary_stroke:hover {
+		&_hover.chip_secondary_stroke:hover,
+		&_hover.chip_secondary_fill.active,
+		&_hover.chip_secondary_stroke.active {
 			background-color: $secondary;
 		}
 
 		&_white_fill:not(&_hover),
 		&_hover.chip_white_fill:hover,
-		&_hover.chip_white_stroke:hover {
+		&_hover.chip_white_stroke:hover,
+		&_hover.chip_white_fill.active,
+		&_hover.chip_white_stroke.active {
 			background-color: $background;
 		}
 
 		&_whiteDeep_fill:not(&_hover),
 		&_hover.chip_whiteDeep_fill:hover,
-		&_hover.chip_whiteDeep_stroke:hover {
+		&_hover.chip_whiteDeep_stroke:hover,
+		&_hover.chip_whiteDeep_fill.active,
+		&_hover.chip_whiteDeep_stroke.active {
 			background-color: #fff;
 		}
 
 		&_white_fill:not(&_hover):hover,
-		&_whiteDeep_fill:not(&_hover):hover {
+		&_whiteDeep_fill:not(&_hover):hover,
+		&_white_fill:not(&_hover).active,
+		&_whiteDeep_fill:not(&_hover).active {
 			background-color: $primary;
 		}
 
-		&_white_stroke:hover {
+		&_white_stroke:hover,
+		&_white_stroke.active {
 			background-color: $background;
 		}
 
 		&_hover.chip_primary_stroke:hover,
-		&_hover.chip_secondary_stroke:hover {
+		&_hover.chip_secondary_stroke:hover,
+		&_hover.chip_primary_stroke.active,
+		&_hover.chip_secondary_stroke.active {
 			color: #fff;
 		}
 

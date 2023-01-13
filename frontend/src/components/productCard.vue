@@ -42,13 +42,14 @@
 				<div class="productCard__row">
 					<AppChip
 						class="productCard__chip"
-						:class="isInCart ? 'active' : ''"
+						:class="{ active: isInCart }"
 						mod="stroke"
 						tag="button"
 						color="white"
 						circle="medium"
 						type="button"
 						aria-label="Добавить в корзину"
+						:disabled="isInCart"
 						@click="addToCart"
 					>
 						<CartIcon fill="none" />
@@ -67,7 +68,6 @@
 					</AppChip>
 				</div>
 			</div>
-			{{ isInCart }}
 			<div class="productCard__wrap">
 				<AppButton class="productCard__button">Купить в 1 клик</AppButton>
 			</div>
@@ -146,7 +146,9 @@ export default defineComponent({
 		const cartStore = useCartStore();
 
 		function addToCart() {
-			cartStore.addToCart(props.id);
+			if (!props.isInCart) {
+				cartStore.addToCart(props.id);
+			}
 		}
 
 		return {
@@ -280,7 +282,7 @@ export default defineComponent({
 		fill: $black;
 	}
 
-	&__chip.active,
+	&__chip.active :deep(path),
 	&__chip:hover :deep(path) {
 		fill: $primary;
 	}

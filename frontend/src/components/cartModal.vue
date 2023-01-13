@@ -44,8 +44,8 @@
 						<div class="cartModal__key">Итого:</div>
 						<div class="cartModal__val">{{ cart.totalFormat }}</div>
 					</div>
-					<AppButton color="secondary" class="cartModal__button">Оформить заказ</AppButton>
-					<AppButton class="cartModal__button" @click="closeModal">Продолжить покупки</AppButton>
+					<AppButton color="success" class="cartModal__button">Оформить заказ</AppButton>
+					<AppButton color="secondary" class="cartModal__button" @click="closeModal">Продолжить покупки</AppButton>
 				</div>
 			</div>
 		</div>
