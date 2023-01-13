@@ -1,6 +1,12 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic.base import TemplateView
 # Create your views here.
 
-def index(request):
-    return render(request, 'blog/index.html')
+class Index_page(TemplateView):
+    template_name = 'blog/index.html'
+
+
+class Backend_page(TemplateView):
+    template_name = 'blog/backend_page.html'
+
+class Frontend_page(TemplateView):
+    template_name = 'blog/frontend_page.html'

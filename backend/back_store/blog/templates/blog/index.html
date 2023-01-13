@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Главная{% endblock %}
 
 
-{% block content %}
-    <h2>А это из index.html</h2>
-
+{% block right %}
+    <div class="container ">
+        <div class="row h-50 columns_color">
+            {% include 'includes/carosel.html' %}
+        </div>
+        <div class="row h-100 columns_color mt-3">
+            <div class="col offset-1">
+                <div class="row mt-5">
+                    <p class="fs-1 fw-bold">О проекте</p>
+                </div>
+                <div class="row mt-2">
+                    <p class="fs-6">
+                        Привет, рады видеть вас на станице нашего домашнего проекта.
+                        Поводом для его создание послужило желание попробовать себя в роли backend разработчика.
+                        Пройдя курсы, решил испробовать на практике знания фреймворка Django.
+                        Рустам решил заняться frontend частью интренет магазина, для обретения новых навыков.
+                        Данная страница полностью реализована на Django template и bootstrap.
+                        Интернет магазин же реализован по принципу BFF- "backend for frontend".
+                        В разделе блог появятся статьи с описанием примен
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

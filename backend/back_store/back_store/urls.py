@@ -47,7 +47,7 @@ urlpatterns = [
     path('api/v1/users/', include('users.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api//v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api//v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('__debug__/', include('debug_toolbar.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

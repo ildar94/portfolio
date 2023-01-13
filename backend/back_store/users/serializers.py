@@ -35,19 +35,10 @@ class UserSerializer(serializers.ModelSerializer):
         return super(UserSerializer, self).update(instance, validated_data)
 
 
-class PassUpdateSerializer(serializers.ModelSerializer):
+class ChangePasswordSerializer(serializers.ModelSerializer):
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
 
     class Meta:
         model = get_user_model()
-        fields = ('id', 'password',)
-        extra_kwargs = {
-            'password': {'write_only': True},
-        }
-
-
-
-    def update(self, instance, validated_data):
-        if 'password' in validated_data:
-            password = validated_data.pop('password')
-            instance.set_password(password)
-        return super(PassUpdateSerializer, self).update(instance, validated_data)
+        fields = ('old_password', 'new_password')

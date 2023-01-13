@@ -6,14 +6,14 @@ from django.urls import path, include
 
 router = routers.DefaultRouter()
 router.register(r'registration', views.CreateUser,basename='register')
-router.register(r'reset', views.ChangePassword,basename='reset')
+#router.register(r'reset', views.ChangePassword,basename='reset')
 
 
 
 #urlpatterns = router
 urlpatterns = [
-    path('', include(router.urls))
-
-
+    path('change-password/', views.ChangePasswordView.as_view()),
 ]
+
+urlpatterns += router.urls
 

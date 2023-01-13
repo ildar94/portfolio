@@ -1,0 +1,58 @@
+{% load static %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+  </div>
+  <div class="carousel-inner h-100 d-flex align-items-center">
+    <div class="carousel-item active">
+        <div class="row row-divided">
+            <div class="col">
+                <div class="card columns_color" style="border: 0px">
+                    <div class="card-body align-items-center text-center">
+                        <h2>Hello</h2>
+                        <p><h4>Меня зовут Ильдар</h4></p>
+                        <p><h5>Я развиваюсь в направлении backend developer</h5></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card columns_color" style="border: 0px">
+                    <div class="card-body">
+                        <img src="{% static "img/django.jpeg" %}" class="card-img-top" alt="backend developer" style="height: 200px; width: 200px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-item">
+              <div class="row">
+            <div class="col">
+                <div class="card columns_color" style="border: 0px">
+                    <div class="card-body align-items-center text-center">
+                        <h2>Hello</h2>
+                        <p><h4>Меня зовут Рустам</h4></p>
+                        <p><h5>Я развиваюсь в направлении frontend developer</h5></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card columns_color" style="border: 0px">
+                    <div class="card-body">
+                        <img src="{% static "img/vue.png" %}" class="card-img-top" alt="backend developer" style="height: 200px; width: 200px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

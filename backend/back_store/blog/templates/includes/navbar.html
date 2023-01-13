@@ -1,0 +1,26 @@
+
+<ul class="nav nav-pills nav-justified columns_color">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Главная</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Биография</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="{% url 'backend_page' %}">Backend developer</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" href="{% url 'frontend_page' %}">Frontend developer</a></li>
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Портфолио</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Интернет магазин</a></li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Блог</a>
+  </li>
+      <li class="nav-item">
+    <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Контакты</a>
+  </li>
+</ul>
